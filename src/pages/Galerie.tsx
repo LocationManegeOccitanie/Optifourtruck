@@ -1,0 +1,145 @@
+import { Layout } from "@/components/Layout";
+import { RevealSection } from "@/components/RevealSection";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+import { useState } from "react";
+import heroPastries from "@/assets/hero-pastries.jpg";
+import chefPortrait from "@/assets/chef-portrait.jpg";
+import petitFours from "@/assets/petit-fours.jpg";
+import weddingCake from "@/assets/wedding-cake.jpg";
+import cateringSpread from "@/assets/catering-spread.jpg";
+import macarons from "@/assets/macarons.jpg";
+
+const categories = [
+  { id: "all", name: "Tout" },
+  { id: "patisserie", name: "Pâtisserie" },
+  { id: "traiteur", name: "Traiteur" },
+  { id: "evenements", name: "Événements" },
+];
+
+const galleryImages = [
+  { src: heroPastries, alt: "Assortiment de pâtisseries", category: "patisserie" },
+  { src: weddingCake, alt: "Wedding cake", category: "evenements" },
+  { src: macarons, alt: "Macarons artisanaux", category: "patisserie" },
+  { src: cateringSpread, alt: "Buffet traiteur", category: "traiteur" },
+  { src: petitFours, alt: "Petit fours", category: "patisserie" },
+  { src: chefPortrait, alt: "Alicia en cuisine", category: "evenements" },
+  { src: heroPastries, alt: "Créations sucrées", category: "patisserie" },
+  { src: cateringSpread, alt: "Réception", category: "traiteur" },
+  { src: macarons, alt: "Macarons colorés", category: "patisserie" },
+];
+
+const Galerie = () => {
+  const [activeCategory, setActiveCategory] = useState("all");
+
+  const filteredImages =
+    activeCategory === "all"
+      ? galleryImages
+      : galleryImages.filter((img) => img.category === activeCategory);
+
+  return (
+    <Layout>
+      {/* Hero */}
+      <section className="pt-32 pb-16 bg-background">
+        <div className="container-wide text-center">
+          <RevealSection>
+            <span className="text-caption">Galerie gourmande</span>
+            <h1 className="heading-hero mt-4 max-w-4xl mx-auto">
+              Laissez-vous{" "}
+              <span className="text-gradient">séduire</span>
+            </h1>
+            <p className="text-body mt-8 max-w-2xl mx-auto text-lg">
+              Découvrez nos créations à travers cette galerie qui témoigne 
+              de notre savoir-faire et de notre passion pour l'artisanat.
+            </p>
+          </RevealSection>
+        </div>
+      </section>
+
+      {/* Filters */}
+      <section className="pb-8 bg-background">
+        <div className="container-wide">
+          <RevealSection>
+            <div className="flex flex-wrap justify-center gap-4">
+              {categories.map((category) => (
+                <motion.button
+                  key={category.id}
+                  onClick={() => setActiveCategory(category.id)}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
+                    activeCategory === category.id
+                      ? "bg-primary text-primary-foreground shadow-[var(--shadow-glow-sage)]"
+                      : "bg-secondary text-muted-foreground hover:bg-secondary/80"
+                  }`}
+                >
+                  {category.name}
+                </motion.button>
+              ))}
+            </div>
+          </RevealSection>
+        </div>
+      </section>
+
+      {/* Gallery Grid */}
+      <section className="section-padding pt-8">
+        <div className="container-wide">
+          <motion.div
+            layout
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {filteredImages.map((image, index) => (
+              <motion.div
+                key={`${image.src}-${index}`}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+              >
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.4 }}
+                  className="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer"
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                    <p className="text-background font-medium">{image.alt}</p>
+                  </div>
+                </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="section-padding bg-accent/30">
+        <div className="container-narrow text-center">
+          <RevealSection>
+            <span className="text-caption">Envie d'en voir plus ?</span>
+            <h2 className="heading-section mt-4">
+              Créons votre <span className="text-primary">prochaine œuvre</span>
+            </h2>
+            <p className="text-body mt-6 max-w-xl mx-auto">
+              Chaque création est unique et réalisée sur-mesure. Partagez-nous 
+              votre projet pour recevoir un devis personnalisé.
+            </p>
+            <Link to="/devis" className="btn-primary mt-10 inline-flex items-center gap-2">
+              Demander un devis
+              <ArrowRight size={18} />
+            </Link>
+          </RevealSection>
+        </div>
+      </section>
+    </Layout>
+  );
+};
+
+export default Galerie;
