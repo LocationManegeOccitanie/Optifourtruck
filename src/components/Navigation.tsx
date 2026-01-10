@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const navLinks = [
   { name: "Accueil", path: "/" },
@@ -11,10 +12,27 @@ const navLinks = [
   { name: "Avis Clients", path: "/avis" },
 ];
 
+// Respect reduced motion preference
+const useReducedMotion = () => {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+    
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
+  
+  return prefersReducedMotion;
+};
+
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,31 +46,66 @@ export const Navigation = () => {
     setIsOpen(false);
   }, [location]);
 
+  // Logo animation variants with accessibility
+  const logoVariants = {
+    initial: prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 },
+    animate: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: prefersReducedMotion ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] as const }
+    }
+  };
+
+  const logoHoverVariants = prefersReducedMotion ? undefined : {
+    scale: 1.02,
+    transition: { duration: 0.3, ease: "easeOut" as const }
+  };
+
   return (
     <>
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: prefersReducedMotion ? 0 : 0.8, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled 
             ? "bg-background/95 backdrop-blur-md shadow-[var(--shadow-soft)]" 
             : "bg-background/80 backdrop-blur-sm"
         }`}
       >
-        <nav className="container-wide flex items-center justify-between py-5">
+        <nav className="container-wide flex items-center justify-between py-3 md:py-4">
           {/* Logo */}
           <Link to="/" className="relative z-10">
             <motion.div 
-              whileHover={{ scale: 1.02 }}
-              className="flex flex-col items-start"
+              variants={logoVariants}
+              initial="initial"
+              animate="animate"
+              whileHover={logoHoverVariants}
+              className="flex items-center gap-3 group"
+              style={{ 
+                filter: isScrolled ? "drop-shadow(0 2px 8px hsl(var(--primary) / 0.15))" : "none",
+                transition: "filter 0.3s ease"
+              }}
             >
-              <span className="font-display text-2xl md:text-3xl font-semibold text-foreground">
-                O P'tit Four
-              </span>
-              <span className="text-xs tracking-[0.3em] text-primary uppercase">
-                Truck
-              </span>
+              {/* Logo compact pour mobile, plus grand pour desktop */}
+              <motion.img 
+                src={logo}
+                alt="O P'tit Four Truck - Pâtisserie Traiteur"
+                className="h-12 w-12 md:h-14 md:w-14 object-contain rounded-lg"
+                whileHover={prefersReducedMotion ? {} : { 
+                  rotate: [0, -2, 2, 0],
+                  transition: { duration: 0.4 }
+                }}
+              />
+              {/* Texte visible uniquement en desktop */}
+              <div className="hidden sm:flex flex-col">
+                <span className="font-display text-lg md:text-xl font-semibold text-foreground leading-tight">
+                  O P'tit Four Truck
+                </span>
+                <span className="text-[10px] tracking-[0.25em] text-primary uppercase">
+                  Pâtisserie – Traiteur
+                </span>
+              </div>
             </motion.div>
           </Link>
 
