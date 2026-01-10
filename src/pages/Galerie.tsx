@@ -10,6 +10,8 @@ import petitFours from "@/assets/petit-fours.jpg";
 import weddingCake from "@/assets/wedding-cake.jpg";
 import cateringSpread from "@/assets/catering-spread.jpg";
 import macarons from "@/assets/macarons.jpg";
+import galetteDesRois from "@/assets/galette-des-rois.jpg";
+import gateauAnniversaire from "@/assets/gateau-anniversaire.jpg";
 
 const categories = [
   { id: "all", name: "Tout" },
@@ -20,8 +22,10 @@ const categories = [
 
 const galleryImages = [
   { src: heroPastries, alt: "Assortiment de pâtisseries", category: "patisserie" },
+  { src: galetteDesRois, alt: "Galette des rois artisanale", category: "patisserie" },
   { src: weddingCake, alt: "Wedding cake", category: "evenements" },
   { src: macarons, alt: "Macarons artisanaux", category: "patisserie" },
+  { src: gateauAnniversaire, alt: "Gâteau d'anniversaire glacé", category: "evenements" },
   { src: cateringSpread, alt: "Buffet traiteur", category: "traiteur" },
   { src: petitFours, alt: "Petit fours", category: "patisserie" },
   { src: chefPortrait, alt: "Alicia en cuisine", category: "evenements" },
