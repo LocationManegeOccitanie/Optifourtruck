@@ -12,6 +12,7 @@ import cateringSpread from "@/assets/catering-spread.jpg";
 import macarons from "@/assets/macarons.jpg";
 import galetteDesRois from "@/assets/galette-des-rois.jpg";
 import gateauAnniversaire from "@/assets/gateau-anniversaire.jpg";
+import plateauCharcuterie from "@/assets/plateau-charcuterie.jpg";
 
 const categories = [
   { id: "all", name: "Tout" },
@@ -27,6 +28,7 @@ const galleryImages = [
   { src: macarons, alt: "Macarons artisanaux", category: "patisserie" },
   { src: gateauAnniversaire, alt: "Gâteau d'anniversaire glacé", category: "evenements" },
   { src: cateringSpread, alt: "Buffet traiteur", category: "traiteur" },
+  { src: plateauCharcuterie, alt: "Plateau charcuterie et fromages", category: "traiteur" },
   { src: petitFours, alt: "Petit fours", category: "patisserie" },
   { src: chefPortrait, alt: "Alicia en cuisine", category: "evenements" },
   { src: heroPastries, alt: "Créations sucrées", category: "patisserie" },
