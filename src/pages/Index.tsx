@@ -15,24 +15,7 @@ import petitFours from "@/assets/petit-fours.jpg";
 import weddingCake from "@/assets/wedding-cake.jpg";
 import cateringSpread from "@/assets/catering-spread.jpg";
 import macarons from "@/assets/macarons.jpg";
-import logo from "@/assets/logo.png";
-import { useRef, useEffect, useState } from "react";
-
-// Respect reduced motion preference
-const useReducedMotion = () => {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReducedMotion(mediaQuery.matches);
-    
-    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
-    mediaQuery.addEventListener("change", handler);
-    return () => mediaQuery.removeEventListener("change", handler);
-  }, []);
-  
-  return prefersReducedMotion;
-};
+import { useRef } from "react";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -59,7 +42,6 @@ const itemVariants = {
 
 const Index = () => {
   const targetRef = useRef<HTMLDivElement>(null);
-  const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: targetRef,
     offset: ["start start", "end start"]
@@ -67,48 +49,6 @@ const Index = () => {
   
   const heroTextY = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
-  // Hero logo animation variants
-  const heroLogoVariants = {
-    hidden: prefersReducedMotion 
-      ? { opacity: 1, y: 0, scale: 1 } 
-      : { opacity: 0, y: 30, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: prefersReducedMotion ? 0 : 0.8,
-        ease: [0.22, 1, 0.36, 1] as const
-      }
-    }
-  };
-
-  const heroTitleVariants = {
-    hidden: prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: prefersReducedMotion ? 0 : 0.7,
-        delay: prefersReducedMotion ? 0 : 0.4,
-        ease: [0.22, 1, 0.36, 1] as const
-      }
-    }
-  };
-
-  const heroSubtitleVariants = {
-    hidden: prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: prefersReducedMotion ? 0 : 0.7,
-        delay: prefersReducedMotion ? 0 : 0.7,
-        ease: [0.22, 1, 0.36, 1] as const
-      }
-    }
-  };
 
   return (
     <Layout>
@@ -119,66 +59,42 @@ const Index = () => {
 
         {/* Content */}
         <motion.div 
-          className="relative z-10 container-wide text-center pt-28 pb-20"
-          style={{ y: prefersReducedMotion ? 0 : heroTextY, opacity: prefersReducedMotion ? 1 : heroOpacity }}
+          className="relative z-10 container-wide text-center pt-32 pb-20"
+          style={{ y: heroTextY, opacity: heroOpacity }}
         >
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
-            {/* Hero Logo - Reveal cinématographique */}
-            <motion.div 
-              variants={heroLogoVariants}
-              initial="hidden"
-              animate="visible"
-              className="flex justify-center mb-8"
-            >
-              <motion.div
-                className="relative"
-                whileHover={prefersReducedMotion ? {} : { 
-                  scale: 1.02,
-                  transition: { duration: 0.3 }
-                }}
+            <motion.div variants={itemVariants}>
+              <motion.span 
+                className="text-caption inline-flex items-center gap-2 mb-6 backdrop-blur-sm bg-background/30 px-4 py-2 rounded-full"
+                whileHover={{ scale: 1.05 }}
               >
-                <motion.img 
-                  src={logo}
-                  alt="O P'tit Four Truck - Pâtisserie Traiteur"
-                  className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 object-contain drop-shadow-2xl"
-                  style={{
-                    filter: "drop-shadow(0 20px 40px hsl(var(--primary) / 0.25))"
-                  }}
-                />
-                {/* Glow effect subtil */}
-                <motion.div
-                  className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/10 via-accent/10 to-transparent blur-2xl -z-10"
-                  animate={prefersReducedMotion ? {} : {
-                    scale: [1, 1.1, 1],
-                    opacity: [0.3, 0.5, 0.3]
-                  }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                />
-              </motion.div>
+                <motion.span
+                  animate={{ rotate: [0, 15, -15, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                >
+                  <Sparkles size={16} />
+                </motion.span>
+                Pâtissier – Traiteur artisanal
+              </motion.span>
             </motion.div>
 
-            {/* Title reveal progressif */}
-            <motion.div 
-              variants={heroTitleVariants}
-              initial="hidden"
-              animate="visible"
-            >
+            <motion.div variants={itemVariants}>
               <h1 className="heading-hero max-w-4xl mx-auto">
                 <SplitText 
                   text="L'art de sublimer vos" 
-                  delay={prefersReducedMotion ? 0 : 0.5}
-                  staggerDelay={prefersReducedMotion ? 0 : 0.04}
+                  delay={0.5}
+                  staggerDelay={0.04}
                 />
                 <br />
                 <span className="text-gradient">
                   <SplitText 
                     text="moments précieux" 
-                    delay={prefersReducedMotion ? 0 : 0.8}
-                    staggerDelay={prefersReducedMotion ? 0 : 0.05}
+                    delay={0.8}
+                    staggerDelay={0.05}
                   />
                 </span>
               </h1>
