@@ -52,31 +52,19 @@ const Index = () => {
   const heroTextY = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-  // Cinematic logo animation with breathing effect
+  // Cinematic logo animation - entrance only, no repeat
   const logoVariants = {
     hidden: { 
       opacity: 0, 
-      y: 40,
-      scale: 0.92
+      y: 20
     },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: {
-        duration: 0.9,
+        duration: 0.7,
         ease: [0.22, 1, 0.36, 1] as const
       }
-    }
-  };
-
-  // Subtle breathing animation (very slow, almost imperceptible)
-  const breathingAnimation = prefersReducedMotion ? {} : {
-    scale: [1, 1.015, 1],
-    transition: {
-      duration: 6,
-      repeat: Infinity,
-      ease: "easeInOut" as const
     }
   };
 
@@ -119,37 +107,25 @@ const Index = () => {
           className="relative z-10 container-wide text-center pt-28 pb-20"
           style={prefersReducedMotion ? {} : { y: heroTextY, opacity: heroOpacity }}
         >
-          {/* Hero Logo - Large, Cinematic with breathing */}
+          {/* Hero Logo - Branding element, static after entrance */}
           <motion.div
             variants={prefersReducedMotion ? {} : logoVariants}
             initial="hidden"
             animate="visible"
-            className="mb-12 md:mb-16 flex justify-center"
+            className="mb-6 md:mb-8 flex justify-center"
           >
-            <motion.div
-              animate={breathingAnimation}
-              className="relative"
-            >
-              {/* Subtle glow behind logo */}
-              <div className="absolute inset-0 blur-3xl opacity-20 bg-gradient-to-br from-sage-400 to-rose-300 scale-75" />
-              <motion.img
-                src={logoPremium}
-                alt="O P'tit Four Truck - Pâtissier Traiteur Artisanal"
-                className="relative h-44 sm:h-56 md:h-72 lg:h-80 xl:h-96 w-auto drop-shadow-2xl"
-                whileHover={prefersReducedMotion ? {} : {
-                  scale: 1.02,
-                  rotate: 0.5,
-                  filter: "drop-shadow(0 12px 32px hsl(78 32% 59% / 0.25))"
-                }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              />
-            </motion.div>
+            <img
+              src={logoPremium}
+              alt="O P'tit Four Truck - Pâtissier Traiteur Artisanal"
+              className="h-24 sm:h-28 md:h-32 lg:h-36 w-auto"
+            />
           </motion.div>
 
           <motion.div
             variants={prefersReducedMotion ? containerVariants : heroContentVariants}
             initial="hidden"
             animate="visible"
+            className="text-center"
           >
             <motion.div variants={prefersReducedMotion ? itemVariants : heroItemVariants}>
               <h1 className="heading-hero max-w-4xl mx-auto">
