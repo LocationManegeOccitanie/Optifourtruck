@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Sparkles, Star, Award, Heart } from "lucide-react";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { ArrowRight, Star, Award, Heart } from "lucide-react";
 import { RevealSection } from "@/components/RevealSection";
 import { Layout } from "@/components/Layout";
 import { TextReveal, SplitText } from "@/components/TextReveal";
@@ -15,6 +15,7 @@ import petitFours from "@/assets/petit-fours.jpg";
 import weddingCake from "@/assets/wedding-cake.jpg";
 import cateringSpread from "@/assets/catering-spread.jpg";
 import macarons from "@/assets/macarons.jpg";
+import logo from "@/assets/logo.svg";
 import { useRef } from "react";
 
 const containerVariants = {
@@ -42,6 +43,7 @@ const itemVariants = {
 
 const Index = () => {
   const targetRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: targetRef,
     offset: ["start start", "end start"]
@@ -49,6 +51,51 @@ const Index = () => {
   
   const heroTextY = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  // Cinematic logo animation
+  const logoVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 30,
+      scale: 0.95
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.9,
+        ease: [0.22, 1, 0.36, 1] as const
+      }
+    }
+  };
+
+  // Staggered reveal for hero content
+  const heroContentVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.6 // Start after logo animation
+      }
+    }
+  };
+
+  const heroItemVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 25 
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+        ease: [0.22, 1, 0.36, 1] as const
+      }
+    }
+  };
 
   return (
     <Layout>
@@ -59,41 +106,45 @@ const Index = () => {
 
         {/* Content */}
         <motion.div 
-          className="relative z-10 container-wide text-center pt-32 pb-20"
-          style={{ y: heroTextY, opacity: heroOpacity }}
+          className="relative z-10 container-wide text-center pt-28 pb-20"
+          style={prefersReducedMotion ? {} : { y: heroTextY, opacity: heroOpacity }}
         >
+          {/* Hero Logo - Large, Cinematic */}
           <motion.div
-            variants={containerVariants}
+            variants={prefersReducedMotion ? {} : logoVariants}
+            initial="hidden"
+            animate="visible"
+            className="mb-8 flex justify-center"
+          >
+            <motion.img
+              src={logo}
+              alt="O P'tit Four Truck - Pâtissier Traiteur Artisanal"
+              className="h-32 sm:h-40 md:h-48 lg:h-56 w-auto drop-shadow-lg"
+              whileHover={prefersReducedMotion ? {} : {
+                scale: 1.02,
+                filter: "drop-shadow(0 8px 20px hsl(78 32% 59% / 0.3))"
+              }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+            />
+          </motion.div>
+
+          <motion.div
+            variants={prefersReducedMotion ? containerVariants : heroContentVariants}
             initial="hidden"
             animate="visible"
           >
-            <motion.div variants={itemVariants}>
-              <motion.span 
-                className="text-caption inline-flex items-center gap-2 mb-6 backdrop-blur-sm bg-background/30 px-4 py-2 rounded-full"
-                whileHover={{ scale: 1.05 }}
-              >
-                <motion.span
-                  animate={{ rotate: [0, 15, -15, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-                >
-                  <Sparkles size={16} />
-                </motion.span>
-                Pâtissier – Traiteur artisanal
-              </motion.span>
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
+            <motion.div variants={prefersReducedMotion ? itemVariants : heroItemVariants}>
               <h1 className="heading-hero max-w-4xl mx-auto">
                 <SplitText 
                   text="L'art de sublimer vos" 
-                  delay={0.5}
+                  delay={prefersReducedMotion ? 0 : 0.7}
                   staggerDelay={0.04}
                 />
                 <br />
                 <span className="text-gradient">
                   <SplitText 
                     text="moments précieux" 
-                    delay={0.8}
+                    delay={prefersReducedMotion ? 0 : 1}
                     staggerDelay={0.05}
                   />
                 </span>
@@ -101,7 +152,7 @@ const Index = () => {
             </motion.div>
 
             <motion.p
-              variants={itemVariants}
+              variants={prefersReducedMotion ? itemVariants : heroItemVariants}
               className="text-body max-w-2xl mx-auto mt-8 text-lg backdrop-blur-sm bg-background/20 p-4 rounded-2xl"
             >
               Créations pâtissières sur-mesure et service traiteur d'exception. 
@@ -109,14 +160,14 @@ const Index = () => {
             </motion.p>
 
             <motion.div
-              variants={itemVariants}
+              variants={prefersReducedMotion ? itemVariants : heroItemVariants}
               className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12"
             >
               <MagneticButton>
                 <Link to="/devis" className="btn-primary flex items-center gap-2 group">
                   Demander un devis
                   <motion.span
-                    animate={{ x: [0, 5, 0] }}
+                    animate={prefersReducedMotion ? {} : { x: [0, 5, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
                   >
                     <ArrowRight size={18} />
@@ -170,7 +221,7 @@ const Index = () => {
               { value: 10, suffix: "+", label: "Années d'expérience", icon: Award },
               { value: 500, suffix: "+", label: "Événements réalisés", icon: Star },
               { value: 98, suffix: "%", label: "Clients satisfaits", icon: Heart },
-              { value: 1000, suffix: "+", label: "Créations uniques", icon: Sparkles },
+              { value: 1000, suffix: "+", label: "Créations uniques", icon: Star },
             ].map((stat, index) => (
               <motion.div 
                 key={index}

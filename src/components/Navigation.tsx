@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import logo from "@/assets/logo.svg";
 
 const navLinks = [
   { name: "Accueil", path: "/" },
@@ -15,6 +16,7 @@ export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,10 +30,28 @@ export const Navigation = () => {
     setIsOpen(false);
   }, [location]);
 
+  const logoAnimation = prefersReducedMotion 
+    ? {} 
+    : {
+        initial: { opacity: 0, y: -20 },
+        animate: { opacity: 1, y: 0 },
+        transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const, delay: 0.2 }
+      };
+
+  const logoHover = prefersReducedMotion
+    ? {}
+    : {
+        whileHover: { 
+          scale: 1.02,
+          filter: "drop-shadow(0 4px 12px hsl(78 32% 59% / 0.25))"
+        },
+        transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] as const }
+      };
+
   return (
     <>
       <motion.header
-        initial={{ y: -100 }}
+        initial={prefersReducedMotion ? {} : { y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
@@ -40,19 +60,23 @@ export const Navigation = () => {
             : "bg-background/80 backdrop-blur-sm"
         }`}
       >
-        <nav className="container-wide flex items-center justify-between py-5">
+        <nav className="container-wide flex items-center justify-between py-3">
           {/* Logo */}
           <Link to="/" className="relative z-10">
             <motion.div 
-              whileHover={{ scale: 1.02 }}
-              className="flex flex-col items-start"
+              {...logoAnimation}
+              {...logoHover}
+              className="flex items-center"
             >
-              <span className="font-display text-2xl md:text-3xl font-semibold text-foreground">
-                O P'tit Four
-              </span>
-              <span className="text-xs tracking-[0.3em] text-primary uppercase">
-                Truck
-              </span>
+              <img 
+                src={logo} 
+                alt="O P'tit Four Truck - Pâtissier Traiteur" 
+                className={`transition-all duration-300 ${
+                  isScrolled 
+                    ? "h-12 md:h-14" 
+                    : "h-14 md:h-16"
+                }`}
+              />
             </motion.div>
           </Link>
 
@@ -109,6 +133,16 @@ export const Navigation = () => {
               transition={{ duration: 0.4, delay: 0.1 }}
               className="flex flex-col items-center justify-center h-full gap-8"
             >
+              {/* Mobile Logo */}
+              <motion.img 
+                src={logo} 
+                alt="O P'tit Four Truck" 
+                className="h-20 mb-4"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+              />
+              
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.path}
