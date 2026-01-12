@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Star, Award, Heart } from "lucide-react";
 import { RevealSection } from "@/components/RevealSection";
 import { Layout } from "@/components/Layout";
@@ -16,7 +16,6 @@ import weddingCake from "@/assets/wedding-cake.jpg";
 import cateringSpread from "@/assets/catering-spread.jpg";
 import macarons from "@/assets/macarons.jpg";
 import logoPremium from "@/assets/logo-premium.png";
-import { useRef } from "react";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -42,21 +41,13 @@ const itemVariants = {
 };
 
 const Index = () => {
-  const targetRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ["start start", "end start"]
-  });
-  
-  const heroTextY = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-  // Cinematic logo animation - entrance only, no repeat
+  // Logo: entrée unique (fade-in + légère montée), puis statique
   const logoVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 20
+    hidden: {
+      opacity: 0,
+      y: 16
     },
     visible: {
       opacity: 1,
@@ -68,22 +59,22 @@ const Index = () => {
     }
   };
 
-  // Staggered reveal for hero content
+  // Staggered reveal for hero content (après le logo)
   const heroContentVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         staggerChildren: 0.2,
-        delayChildren: 0.6 // Start after logo animation
+        delayChildren: 0.55
       }
     }
   };
 
   const heroItemVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 25 
+    hidden: {
+      opacity: 0,
+      y: 22
     },
     visible: {
       opacity: 1,
@@ -98,47 +89,45 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section ref={targetRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <HeroParallax src={heroPastries} alt="Pâtisseries artisanales" />
         <FloatingElements />
 
         {/* Content */}
-        <motion.div 
-          className="relative z-10 container-wide text-center pt-28 pb-20"
-          style={prefersReducedMotion ? {} : { y: heroTextY, opacity: heroOpacity }}
-        >
-          {/* Hero Logo - Branding element, static after entrance */}
+        <div className="relative z-10 container-wide text-center pt-28 pb-20">
+          {/* 1) Logo (branding) */}
           <motion.div
             variants={prefersReducedMotion ? {} : logoVariants}
             initial="hidden"
             animate="visible"
-            className="mb-6 md:mb-8 flex justify-center"
+            className="mb-5 md:mb-6 flex justify-center"
           >
             <img
               src={logoPremium}
               alt="O P'tit Four Truck - Pâtissier Traiteur Artisanal"
-              className="h-24 sm:h-28 md:h-32 lg:h-36 w-auto"
+              className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto"
+              decoding="async"
             />
           </motion.div>
 
+          {/* 2) Titre 3) Sous-titre 4) CTA */}
           <motion.div
             variants={prefersReducedMotion ? containerVariants : heroContentVariants}
             initial="hidden"
             animate="visible"
-            className="text-center"
           >
             <motion.div variants={prefersReducedMotion ? itemVariants : heroItemVariants}>
               <h1 className="heading-hero max-w-4xl mx-auto">
-                <SplitText 
-                  text="L'art de sublimer vos" 
-                  delay={prefersReducedMotion ? 0 : 0.7}
+                <SplitText
+                  text="L'art de sublimer vos"
+                  delay={prefersReducedMotion ? 0 : 0.65}
                   staggerDelay={0.04}
                 />
                 <br />
                 <span className="text-gradient">
-                  <SplitText 
-                    text="moments précieux" 
-                    delay={prefersReducedMotion ? 0 : 1}
+                  <SplitText
+                    text="moments précieux"
+                    delay={prefersReducedMotion ? 0 : 0.9}
                     staggerDelay={0.05}
                   />
                 </span>
@@ -149,7 +138,7 @@ const Index = () => {
               variants={prefersReducedMotion ? itemVariants : heroItemVariants}
               className="text-body max-w-2xl mx-auto mt-8 text-lg backdrop-blur-sm bg-background/20 p-4 rounded-2xl"
             >
-              Créations pâtissières sur-mesure et service traiteur d'exception. 
+              Créations pâtissières sur-mesure et service traiteur d'exception.
               Chaque gourmandise est une invitation au voyage des saveurs.
             </motion.p>
 
@@ -160,12 +149,9 @@ const Index = () => {
               <MagneticButton>
                 <Link to="/devis" className="btn-primary flex items-center gap-2 group">
                   Demander un devis
-                  <motion.span
-                    animate={prefersReducedMotion ? {} : { x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
+                  <span className="transition-transform duration-300 group-hover:translate-x-0.5">
                     <ArrowRight size={18} />
-                  </motion.span>
+                  </span>
                 </Link>
               </MagneticButton>
               <MagneticButton>
@@ -175,29 +161,21 @@ const Index = () => {
               </MagneticButton>
             </motion.div>
           </motion.div>
-        </motion.div>
+        </div>
 
-        {/* Scroll indicator */}
+        {/* Scroll indicator (statique, sans boucle) */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 1 }}
+          transition={{ delay: 1.4, duration: 0.8 }}
           className="absolute bottom-10 left-1/2 -translate-x-1/2"
         >
-          <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-center gap-2"
-          >
+          <div className="flex flex-col items-center gap-2">
             <span className="text-xs uppercase tracking-widest text-muted-foreground">Découvrir</span>
             <div className="w-6 h-10 border-2 border-foreground/30 rounded-full flex items-start justify-center p-1">
-              <motion.div 
-                className="w-1.5 h-2.5 bg-primary rounded-full"
-                animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-              />
+              <div className="w-1.5 h-2.5 bg-primary rounded-full" />
             </div>
-          </motion.div>
+          </div>
         </motion.div>
       </section>
 
