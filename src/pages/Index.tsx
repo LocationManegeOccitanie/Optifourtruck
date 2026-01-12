@@ -15,7 +15,7 @@ import petitFours from "@/assets/petit-fours.jpg";
 import weddingCake from "@/assets/wedding-cake.jpg";
 import cateringSpread from "@/assets/catering-spread.jpg";
 import macarons from "@/assets/macarons.jpg";
-import logoPremium from "@/assets/logo-premium.png";
+import logoHautDeGamme from "@/assets/logo-haut-de-gamme.png";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -43,21 +43,58 @@ const itemVariants = {
 const Index = () => {
   const prefersReducedMotion = useReducedMotion();
 
-  // Logo: entrée unique (fade-in + légère montée), puis statique
+  // Logo: animation cinématographique premium
+  // 1) Fade-in doux + légère montée
+  // 2) Stabilisation
+  // 3) Micro-respiration très lente (presque imperceptible)
   const logoVariants = {
     hidden: {
       opacity: 0,
-      y: 16
+      y: 24,
+      scale: 0.97
     },
     visible: {
       opacity: 1,
       y: 0,
+      scale: 1,
       transition: {
-        duration: 0.7,
+        duration: 1.2,
         ease: [0.22, 1, 0.36, 1] as const
       }
     }
   };
+
+  // Micro-animation de respiration très subtile (loop après entrée)
+  const breathingAnimation = prefersReducedMotion
+    ? {}
+    : {
+        animate: {
+          scale: [1, 1.008, 1],
+          opacity: [1, 0.97, 1]
+        },
+        transition: {
+          duration: 6,
+          ease: [0.37, 0, 0.63, 1] as const, // easeInOut cubic bezier
+          repeat: Infinity,
+          repeatType: "loop" as const,
+          delay: 1.5 // commence après l'animation d'entrée
+        }
+      };
+
+  // Hover subtil pour desktop
+  const logoHover = prefersReducedMotion
+    ? {}
+    : {
+        whileHover: {
+          scale: 1.02,
+          rotateY: 2,
+          filter: "drop-shadow(0 8px 24px hsl(78 32% 59% / 0.2))"
+        },
+        transition: {
+          duration: 0.4,
+          ease: [0.22, 1, 0.36, 1] as const
+        }
+      };
 
   // Staggered reveal for hero content (après le logo)
   const heroContentVariants = {
@@ -95,19 +132,27 @@ const Index = () => {
 
         {/* Content */}
         <div className="relative z-10 container-wide text-center pt-28 pb-20">
-          {/* 1) Logo (branding) */}
+          {/* 1) Logo central - branding premium avec espace généreux */}
           <motion.div
             variants={prefersReducedMotion ? {} : logoVariants}
             initial="hidden"
             animate="visible"
-            className="mb-5 md:mb-6 flex justify-center"
+            className="mb-10 md:mb-14 lg:mb-16 flex justify-center"
           >
-            <img
-              src={logoPremium}
-              alt="O P'tit Four Truck - Pâtissier Traiteur Artisanal"
-              className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto"
-              decoding="async"
-            />
+            <motion.div
+              {...breathingAnimation}
+              {...logoHover}
+              className="relative"
+            >
+              {/* Halo subtil de profondeur */}
+              <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent blur-3xl scale-150 opacity-60" />
+              <img
+                src={logoHautDeGamme}
+                alt="O P'tit Four Truck - Pâtisserie Traiteur"
+                className="relative h-36 sm:h-44 md:h-52 lg:h-60 xl:h-72 w-auto"
+                decoding="async"
+              />
+            </motion.div>
           </motion.div>
 
           {/* 2) Titre 3) Sous-titre 4) CTA */}
