@@ -43,21 +43,36 @@ const itemVariants = {
 const Index = () => {
   const prefersReducedMotion = useReducedMotion();
 
-  // Logo: entrée unique (fade-in + légère montée), puis statique
+  // Logo cinématographique: fade-in + légère montée, puis respiration très lente
   const logoVariants = {
     hidden: {
       opacity: 0,
-      y: 16
+      y: 30,
+      scale: 0.96
     },
     visible: {
       opacity: 1,
       y: 0,
+      scale: 1,
       transition: {
-        duration: 0.7,
+        duration: 1.2,
         ease: [0.22, 1, 0.36, 1] as const
       }
     }
   };
+
+  // Micro respiration très lente (presque imperceptible) - après stabilisation
+  const breathingAnimation = prefersReducedMotion
+    ? {}
+    : {
+        scale: [1, 1.008, 1],
+        transition: {
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut" as const,
+          delay: 1.5 // Démarre après l'entrée
+        }
+      };
 
   // Staggered reveal for hero content (après le logo)
   const heroContentVariants = {
@@ -65,8 +80,8 @@ const Index = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.55
+        staggerChildren: 0.25,
+        delayChildren: 1.0
       }
     }
   };
@@ -74,13 +89,13 @@ const Index = () => {
   const heroItemVariants = {
     hidden: {
       opacity: 0,
-      y: 22
+      y: 24
     },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.7,
+        duration: 0.9,
         ease: [0.22, 1, 0.36, 1] as const
       }
     }
@@ -93,20 +108,27 @@ const Index = () => {
         <HeroParallax src={heroPastries} alt="Pâtisseries artisanales" />
         <FloatingElements />
 
-        {/* Content */}
-        <div className="relative z-10 container-wide text-center pt-28 pb-20">
-          {/* 1) Logo (branding) */}
+        {/* Content - Logo centered with generous breathing space */}
+        <div className="relative z-10 container-wide text-center pt-20 pb-16 flex flex-col items-center justify-center min-h-screen">
+          
+          {/* Logo Premium - Central branding element */}
           <motion.div
             variants={prefersReducedMotion ? {} : logoVariants}
             initial="hidden"
             animate="visible"
-            className="mb-5 md:mb-6 flex justify-center"
+            className="mb-10 md:mb-14 lg:mb-16 flex justify-center"
           >
-            <img
+            <motion.img
               src={logoPremium}
               alt="O P'tit Four Truck - Pâtissier Traiteur Artisanal"
-              className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto"
+              className="h-44 sm:h-56 md:h-64 lg:h-72 xl:h-80 w-auto drop-shadow-[0_8px_32px_rgba(0,0,0,0.08)]"
               decoding="async"
+              animate={breathingAnimation}
+              whileHover={prefersReducedMotion ? {} : {
+                scale: 1.015,
+                rotateY: 2,
+                transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] }
+              }}
             />
           </motion.div>
 
