@@ -16,8 +16,6 @@ import weddingCake from "@/assets/wedding-cake.jpg";
 import cateringSpread from "@/assets/catering-spread.jpg";
 import macarons from "@/assets/macarons.jpg";
 import logoPremium from "@/assets/logo-premium.png";
-import decorativeLeft from "@/assets/decorative-flourish-left.png";
-import decorativeRight from "@/assets/decorative-flourish-right.png";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -45,36 +43,21 @@ const itemVariants = {
 const Index = () => {
   const prefersReducedMotion = useReducedMotion();
 
-  // Logo cinématographique: fade-in + légère montée, puis respiration très lente
+  // Logo: entrée unique (fade-in + légère montée), puis statique
   const logoVariants = {
     hidden: {
       opacity: 0,
-      y: 30,
-      scale: 0.96
+      y: 16
     },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: {
-        duration: 1.2,
+        duration: 0.7,
         ease: [0.22, 1, 0.36, 1] as const
       }
     }
   };
-
-  // Micro respiration très lente (presque imperceptible) - après stabilisation
-  const breathingAnimation = prefersReducedMotion
-    ? {}
-    : {
-        scale: [1, 1.008, 1],
-        transition: {
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut" as const,
-          delay: 1.5 // Démarre après l'entrée
-        }
-      };
 
   // Staggered reveal for hero content (après le logo)
   const heroContentVariants = {
@@ -82,8 +65,8 @@ const Index = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.25,
-        delayChildren: 1.0
+        staggerChildren: 0.2,
+        delayChildren: 0.55
       }
     }
   };
@@ -91,13 +74,13 @@ const Index = () => {
   const heroItemVariants = {
     hidden: {
       opacity: 0,
-      y: 24
+      y: 22
     },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.9,
+        duration: 0.7,
         ease: [0.22, 1, 0.36, 1] as const
       }
     }
@@ -110,58 +93,20 @@ const Index = () => {
         <HeroParallax src={heroPastries} alt="Pâtisseries artisanales" />
         <FloatingElements />
 
-        {/* Content - Logo centered with generous breathing space */}
-        <div className="relative z-10 container-wide text-center pt-20 pb-16 flex flex-col items-center justify-center min-h-screen">
-          
-          {/* Logo Premium avec éléments décoratifs haut de gamme */}
+        {/* Content */}
+        <div className="relative z-10 container-wide text-center pt-28 pb-20">
+          {/* 1) Logo (branding) */}
           <motion.div
             variants={prefersReducedMotion ? {} : logoVariants}
             initial="hidden"
             animate="visible"
-            className="mb-10 md:mb-14 lg:mb-16 flex items-center justify-center relative"
+            className="mb-5 md:mb-6 flex justify-center"
           >
-            {/* Flourish gauche - apparition décalée et subtile */}
-            <motion.img
-              src={decorativeLeft}
-              alt=""
-              aria-hidden="true"
-              className="absolute -left-8 sm:-left-12 md:-left-20 lg:-left-28 top-1/2 -translate-y-1/2 h-24 sm:h-32 md:h-40 lg:h-48 w-auto opacity-60 pointer-events-none"
-              initial={{ opacity: 0, x: 20, scale: 0.9 }}
-              animate={{ 
-                opacity: 0.6, 
-                x: 0, 
-                scale: 1,
-                transition: { duration: 1.4, delay: 0.6, ease: [0.22, 1, 0.36, 1] }
-              }}
-            />
-
-            {/* Logo central */}
-            <motion.img
+            <img
               src={logoPremium}
               alt="O P'tit Four Truck - Pâtissier Traiteur Artisanal"
-              className="h-44 sm:h-56 md:h-64 lg:h-72 xl:h-80 w-auto drop-shadow-[0_8px_32px_rgba(0,0,0,0.08)] relative z-10"
+              className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto"
               decoding="async"
-              animate={breathingAnimation}
-              whileHover={prefersReducedMotion ? {} : {
-                scale: 1.015,
-                rotateY: 2,
-                transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] }
-              }}
-            />
-
-            {/* Flourish droite - apparition décalée et subtile */}
-            <motion.img
-              src={decorativeRight}
-              alt=""
-              aria-hidden="true"
-              className="absolute -right-8 sm:-right-12 md:-right-20 lg:-right-28 top-1/2 -translate-y-1/2 h-24 sm:h-32 md:h-40 lg:h-48 w-auto opacity-60 pointer-events-none"
-              initial={{ opacity: 0, x: -20, scale: 0.9 }}
-              animate={{ 
-                opacity: 0.6, 
-                x: 0, 
-                scale: 1,
-                transition: { duration: 1.4, delay: 0.8, ease: [0.22, 1, 0.36, 1] }
-              }}
             />
           </motion.div>
 
