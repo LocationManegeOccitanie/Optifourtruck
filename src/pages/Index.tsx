@@ -297,20 +297,19 @@ const Index = () => {
               </TextReveal>
               <TextReveal delay={0.1}>
                 <h2 className="heading-section mt-4">
-                  Un savoir-faire artisanal transmis avec <span className="text-primary">passion</span>
+                  Une passion guidée par le <span className="text-primary">sens</span>
                 </h2>
               </TextReveal>
               <RevealSection delay={0.3}>
                 <p className="text-body">
-                  Derrière O P'tit Four Truck, il y a Alicia Catala, artisane passionnée qui a fait de la pâtisserie 
-                  bien plus qu'un métier : une véritable vocation. Chaque création est le fruit d'un travail minutieux, 
-                  d'ingrédients soigneusement sélectionnés et d'un amour sincère pour l'art culinaire.
+                  Derrière O P'tit Four Truck, il y a Alicia. Une jeune entrepreneuse animée depuis toujours 
+                  par la pâtisserie et la cuisine, mais surtout par l'envie de faire les choses avec sens.
                 </p>
               </RevealSection>
               <RevealSection delay={0.4}>
                 <p className="text-body">
-                  Notre engagement ? Vous offrir des moments de pur bonheur gustatif, que ce soit pour 
-                  vos événements familiaux ou vos réceptions professionnelles.
+                  L'idée n'est pas née d'une tendance, mais d'un besoin profond : créer un univers culinaire 
+                  où les saveurs authentiques se rencontrent, se respectent et se partagent.
                 </p>
               </RevealSection>
               <RevealSection delay={0.5}>
