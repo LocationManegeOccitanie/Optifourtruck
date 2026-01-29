@@ -1,22 +1,24 @@
 import { Link } from "react-router-dom";
 import { Instagram, Facebook, Mail, Phone, MapPin } from "lucide-react";
 import { RevealSection } from "./RevealSection";
+import logoAlicia from "@/assets/logo-alicia.svg";
 
 export const Footer = () => {
   return (
     <footer className="bg-foreground text-background">
       <div className="container-wide section-padding">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-          {/* Brand */}
+          {/* Brand with Logo */}
           <RevealSection className="lg:col-span-1">
             <div className="flex flex-col items-start">
-              <span className="font-display text-3xl font-semibold">
-                O P'tit Four
-              </span>
-              <span className="text-xs tracking-[0.3em] text-primary uppercase mt-1">
-                Truck
-              </span>
-              <p className="mt-6 text-background/70 text-sm leading-relaxed max-w-xs">
+              <Link to="/" className="block mb-6 group">
+                <img 
+                  src={logoAlicia} 
+                  alt="O P'tit Four Truck - Alicia Catala" 
+                  className="h-16 md:h-20 w-auto brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+                />
+              </Link>
+              <p className="text-background/70 text-sm leading-relaxed max-w-xs">
                 Pâtisserie artisanale & traiteur. Des créations sur-mesure pour sublimer vos moments précieux.
               </p>
             </div>
@@ -94,7 +96,7 @@ export const Footer = () => {
         {/* Bottom */}
         <div className="border-t border-background/10 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-background/50 text-xs">
-            © 2024 O P'tit Four Truck. Tous droits réservés.
+            © 2024 O P'tit Four Truck - Alicia Catala. Tous droits réservés.
           </p>
           <p className="text-background/50 text-xs">
             Artisan pâtissier-traiteur

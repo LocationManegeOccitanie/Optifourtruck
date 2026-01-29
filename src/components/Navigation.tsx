@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import logo from "@/assets/logo-haut-de-gamme.png";
+import logoAlicia from "@/assets/logo-alicia.svg";
 
 const navLinks = [
   { name: "Accueil", path: "/" },
@@ -33,17 +33,17 @@ export const Navigation = () => {
   const logoAnimation = prefersReducedMotion 
     ? {} 
     : {
-        initial: { opacity: 0, y: -20 },
-        animate: { opacity: 1, y: 0 },
-        transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const, delay: 0.2 }
+        initial: { opacity: 0, x: -20 },
+        animate: { opacity: 1, x: 0 },
+        transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const, delay: 0.1 }
       };
 
   const logoHover = prefersReducedMotion
     ? {}
     : {
         whileHover: { 
-          scale: 1.02,
-          filter: "drop-shadow(0 4px 12px hsl(78 32% 59% / 0.25))"
+          scale: 1.03,
+          filter: "drop-shadow(0 2px 8px hsl(78 32% 59% / 0.2))"
         },
         transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] as const }
       };
@@ -60,7 +60,7 @@ export const Navigation = () => {
             : "bg-background/80 backdrop-blur-sm"
         }`}
       >
-        <nav className="container-wide flex items-center justify-between py-3">
+        <nav className="container-wide flex items-center justify-between py-2 md:py-3">
           {/* Logo */}
           <Link to="/" className="relative z-10">
             <motion.div 
@@ -69,12 +69,12 @@ export const Navigation = () => {
               className="flex items-center"
             >
               <img 
-                src={logo} 
-                alt="O P'tit Four Truck - Pâtissier Traiteur" 
+                src={logoAlicia} 
+                alt="O P'tit Four Truck - Alicia Catala" 
                 className={`transition-all duration-300 ${
                   isScrolled 
-                    ? "h-12 md:h-14" 
-                    : "h-14 md:h-16"
+                    ? "h-10 md:h-12" 
+                    : "h-12 md:h-14"
                 }`}
               />
             </motion.div>
@@ -135,9 +135,9 @@ export const Navigation = () => {
             >
               {/* Mobile Logo */}
               <motion.img 
-                src={logo} 
+                src={logoAlicia} 
                 alt="O P'tit Four Truck" 
-                className="h-20 mb-4"
+                className="h-24 mb-4"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
