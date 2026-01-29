@@ -43,65 +43,68 @@ const itemVariants = {
 const Index = () => {
   const prefersReducedMotion = useReducedMotion();
 
-  // Animation d'entrée spectaculaire et premium
+  // Animation d'entrée spectaculaire - effet "wow" cinématographique
   const logoVariants = {
     hidden: {
       opacity: 0,
-      scale: 0.8,
-      y: 60,
-      filter: "blur(20px)"
+      scale: 0.6,
+      y: 80,
+      filter: "blur(30px)",
+      rotateX: 15
     },
     visible: {
       opacity: 1,
       scale: 1,
       y: 0,
       filter: "blur(0px)",
+      rotateX: 0,
       transition: {
-        duration: 1.4,
-        ease: [0.16, 1, 0.3, 1] as const // easeOutExpo
+        duration: 1.6,
+        ease: [0.16, 1, 0.3, 1] as const
       }
     }
   };
 
-  // Micro-animation de respiration élégante (presque imperceptible)
+  // Micro-animation de respiration premium
   const breathingAnimation = prefersReducedMotion
     ? {}
     : {
         animate: {
-          scale: [1, 1.015, 1],
-          opacity: [1, 0.96, 1]
+          scale: [1, 1.02, 1],
+          y: [0, -3, 0]
         },
         transition: {
-          duration: 5,
+          duration: 6,
           ease: [0.37, 0, 0.63, 1] as const,
           repeat: Infinity,
           repeatType: "loop" as const,
-          delay: 1.8
+          delay: 2
         }
       };
 
-  // Hover premium avec glow subtil
+  // Hover effet magnétique premium
   const logoHover = prefersReducedMotion
     ? {}
     : {
         whileHover: {
-          scale: 1.03,
-          filter: "drop-shadow(0 0 40px hsl(78 32% 59% / 0.35))"
+          scale: 1.05,
+          y: -5,
+          filter: "drop-shadow(0 20px 50px hsl(78 32% 59% / 0.4))"
         },
         transition: {
-          duration: 0.5,
+          duration: 0.6,
           ease: [0.22, 1, 0.36, 1] as const
         }
       };
 
-  // Staggered reveal for hero content (après le logo)
+  // Staggered reveal pour le contenu hero
   const heroContentVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.55
+        staggerChildren: 0.15,
+        delayChildren: 0.8
       }
     }
   };
@@ -109,11 +112,31 @@ const Index = () => {
   const heroItemVariants = {
     hidden: {
       opacity: 0,
-      y: 22
+      y: 40,
+      filter: "blur(10px)"
     },
     visible: {
       opacity: 1,
       y: 0,
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.9,
+        ease: [0.16, 1, 0.3, 1] as const
+      }
+    }
+  };
+
+  // Animation pour les boutons CTA
+  const ctaVariants = {
+    hidden: {
+      opacity: 0,
+      y: 30,
+      scale: 0.9
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
       transition: {
         duration: 0.7,
         ease: [0.22, 1, 0.36, 1] as const
@@ -123,85 +146,131 @@ const Index = () => {
 
   return (
     <Layout>
-      {/* Hero Section */}
+      {/* Hero Section - Full cinematic experience */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <HeroParallax src={heroPastries} alt="Pâtisseries artisanales" />
         <FloatingElements />
 
-        {/* Content */}
-        <div className="relative z-10 container-wide text-center pt-28 pb-20">
-          {/* 1) Logo central - branding premium avec espace généreux */}
+        {/* Premium content container */}
+        <div className="relative z-10 container-wide text-center pt-20 pb-16 md:pt-28 md:pb-20">
+          
+          {/* Logo central avec animation spectaculaire */}
           <motion.div
             variants={prefersReducedMotion ? {} : logoVariants}
             initial="hidden"
             animate="visible"
-            className="mb-10 md:mb-14 lg:mb-16 flex justify-center"
+            className="mb-8 md:mb-12 flex justify-center perspective-1000"
           >
             <motion.div
               {...breathingAnimation}
               {...logoHover}
               className="relative group cursor-pointer"
             >
-              {/* Glow effect - halo lumineux premium */}
-              <div className="absolute inset-0 bg-gradient-radial from-primary/15 via-primary/5 to-transparent blur-3xl scale-[2] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-              <div className="absolute inset-0 bg-gradient-radial from-accent/10 via-transparent to-transparent blur-2xl scale-150 opacity-50" />
+              {/* Glow layers dynamiques */}
+              <motion.div 
+                className="absolute inset-0 bg-gradient-radial from-primary/30 via-primary/10 to-transparent blur-[80px] scale-[2.5]"
+                animate={{
+                  opacity: [0.4, 0.7, 0.4],
+                  scale: [2.5, 2.8, 2.5]
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+              <motion.div 
+                className="absolute inset-0 bg-gradient-radial from-accent/20 via-transparent to-transparent blur-[60px] scale-[2]"
+                animate={{
+                  opacity: [0.3, 0.6, 0.3],
+                  scale: [2, 2.3, 2]
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.5
+                }}
+              />
               
-              {/* Logo SVG */}
+              {/* Shimmer effect on hover */}
+              <div className="absolute inset-0 overflow-hidden rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
+                />
+              </div>
+              
+              {/* Logo */}
               <img
                 src={logoAlicia}
                 alt="O P'tit Four Truck - Alicia Catala - Pâtisserie Traiteur"
-                className="relative h-28 sm:h-36 md:h-44 lg:h-52 xl:h-60 w-auto max-w-[90vw]"
+                className="relative h-32 sm:h-40 md:h-52 lg:h-64 xl:h-72 w-auto max-w-[90vw] drop-shadow-2xl"
                 decoding="async"
               />
             </motion.div>
           </motion.div>
 
-          {/* 2) Titre 3) Sous-titre 4) CTA */}
+          {/* Titre avec animation lettre par lettre */}
           <motion.div
             variants={prefersReducedMotion ? containerVariants : heroContentVariants}
             initial="hidden"
             animate="visible"
           >
             <motion.div variants={prefersReducedMotion ? itemVariants : heroItemVariants}>
-              <h1 className="heading-hero max-w-4xl mx-auto">
+              <h1 className="heading-hero max-w-4xl mx-auto leading-[1.1]">
                 <SplitText
                   text="L'art de sublimer vos"
-                  delay={prefersReducedMotion ? 0 : 0.65}
-                  staggerDelay={0.04}
+                  delay={prefersReducedMotion ? 0 : 0.9}
+                  staggerDelay={0.03}
                 />
                 <br />
-                <span className="text-gradient">
+                <span className="text-gradient inline-block mt-2">
                   <SplitText
                     text="moments précieux"
-                    delay={prefersReducedMotion ? 0 : 0.9}
-                    staggerDelay={0.05}
+                    delay={prefersReducedMotion ? 0 : 1.2}
+                    staggerDelay={0.04}
                   />
                 </span>
               </h1>
             </motion.div>
 
-            <motion.p
-              variants={prefersReducedMotion ? itemVariants : heroItemVariants}
-              className="text-body max-w-2xl mx-auto mt-8 text-lg backdrop-blur-sm bg-background/20 p-4 rounded-2xl"
-            >
-              Créations pâtissières sur-mesure et service traiteur d'exception.
-              Chaque gourmandise est une invitation au voyage des saveurs.
-            </motion.p>
-
+            {/* Sous-titre avec glassmorphism */}
             <motion.div
               variants={prefersReducedMotion ? itemVariants : heroItemVariants}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12"
+              className="mt-8 md:mt-10"
+            >
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed backdrop-blur-md bg-background/30 px-6 py-4 rounded-2xl border border-white/10 shadow-lg">
+                Créations pâtissières sur-mesure et service traiteur d'exception.
+                <br className="hidden sm:block" />
+                <span className="text-foreground/90">Chaque gourmandise est une invitation au voyage des saveurs.</span>
+              </p>
+            </motion.div>
+
+            {/* CTAs avec animations premium */}
+            <motion.div
+              variants={prefersReducedMotion ? itemVariants : ctaVariants}
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10 md:mt-14"
             >
               <MagneticButton>
-                <Link to="/devis" className="btn-primary flex items-center gap-2 group">
-                  Demander un devis
-                  <span className="transition-transform duration-300 group-hover:translate-x-0.5">
-                    <ArrowRight size={18} />
-                  </span>
+                <Link 
+                  to="/devis" 
+                  className="btn-primary flex items-center gap-3 group text-base md:text-lg px-8 py-4 shadow-lg hover:shadow-xl transition-shadow"
+                >
+                  <span>Demander un devis</span>
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ x: [0, 4, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <ArrowRight size={20} />
+                  </motion.span>
                 </Link>
               </MagneticButton>
               <MagneticButton>
-                <Link to="/galerie" className="btn-secondary">
+                <Link 
+                  to="/galerie" 
+                  className="btn-secondary text-base md:text-lg px-8 py-4 backdrop-blur-sm"
+                >
                   Découvrir nos créations
                 </Link>
               </MagneticButton>
@@ -209,58 +278,30 @@ const Index = () => {
           </motion.div>
         </div>
 
-        {/* Scroll indicator (statique, sans boucle) */}
+        {/* Scroll indicator élégant */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.4, duration: 0.8 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2.2, duration: 0.8 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
-          <div className="flex flex-col items-center gap-2">
-            <span className="text-xs uppercase tracking-widest text-muted-foreground">Découvrir</span>
-            <div className="w-6 h-10 border-2 border-foreground/30 rounded-full flex items-start justify-center p-1">
-              <div className="w-1.5 h-2.5 bg-primary rounded-full" />
-            </div>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-16 bg-secondary/30 relative overflow-hidden">
-        <div className="container-wide">
           <motion.div 
-            className="grid grid-cols-2 md:grid-cols-4 gap-8"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            className="flex flex-col items-center gap-3 cursor-pointer group"
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           >
-            {[
-              { value: 10, suffix: "+", label: "Années d'expérience", icon: Award },
-              { value: 500, suffix: "+", label: "Événements réalisés", icon: Star },
-              { value: 98, suffix: "%", label: "Clients satisfaits", icon: Heart },
-              { value: 1000, suffix: "+", label: "Créations uniques", icon: Star },
-            ].map((stat, index) => (
+            <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground group-hover:text-foreground transition-colors">
+              Découvrir
+            </span>
+            <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 group-hover:border-primary/50 transition-colors flex justify-center pt-2">
               <motion.div 
-                key={index}
-                variants={itemVariants}
-                className="text-center group"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="inline-flex items-center justify-center w-12 h-12 mb-4 rounded-full bg-primary/10 text-primary"
-                >
-                  <stat.icon size={24} />
-                </motion.div>
-                <div className="font-display text-4xl md:text-5xl font-semibold text-foreground">
-                  <CountUp value={stat.value} suffix={stat.suffix} />
-                </div>
-                <p className="text-muted-foreground text-sm mt-2">{stat.label}</p>
-              </motion.div>
-            ))}
+                className="w-1.5 h-1.5 rounded-full bg-primary"
+                animate={{ y: [0, 12, 0], opacity: [1, 0.5, 1] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </div>
           </motion.div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Savoir-faire Section */}
