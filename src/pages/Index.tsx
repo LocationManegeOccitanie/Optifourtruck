@@ -15,7 +15,7 @@ import petitFours from "@/assets/petit-fours.jpg";
 import weddingCake from "@/assets/wedding-cake.jpg";
 import cateringSpread from "@/assets/catering-spread.jpg";
 import macarons from "@/assets/macarons.jpg";
-import logoHautDeGamme from "@/assets/logo-haut-de-gamme.png";
+import logoAlicia from "@/assets/logo-alicia.svg";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -43,55 +43,53 @@ const itemVariants = {
 const Index = () => {
   const prefersReducedMotion = useReducedMotion();
 
-  // Logo: animation cinématographique premium
-  // 1) Fade-in doux + légère montée
-  // 2) Stabilisation
-  // 3) Micro-respiration très lente (presque imperceptible)
+  // Animation d'entrée spectaculaire et premium
   const logoVariants = {
     hidden: {
       opacity: 0,
-      y: 24,
-      scale: 0.97
+      scale: 0.8,
+      y: 60,
+      filter: "blur(20px)"
     },
     visible: {
       opacity: 1,
-      y: 0,
       scale: 1,
+      y: 0,
+      filter: "blur(0px)",
       transition: {
-        duration: 1.2,
-        ease: [0.22, 1, 0.36, 1] as const
+        duration: 1.4,
+        ease: [0.16, 1, 0.3, 1] as const // easeOutExpo
       }
     }
   };
 
-  // Micro-animation de respiration très subtile (loop après entrée)
+  // Micro-animation de respiration élégante (presque imperceptible)
   const breathingAnimation = prefersReducedMotion
     ? {}
     : {
         animate: {
-          scale: [1, 1.008, 1],
-          opacity: [1, 0.97, 1]
+          scale: [1, 1.015, 1],
+          opacity: [1, 0.96, 1]
         },
         transition: {
-          duration: 6,
-          ease: [0.37, 0, 0.63, 1] as const, // easeInOut cubic bezier
+          duration: 5,
+          ease: [0.37, 0, 0.63, 1] as const,
           repeat: Infinity,
           repeatType: "loop" as const,
-          delay: 1.5 // commence après l'animation d'entrée
+          delay: 1.8
         }
       };
 
-  // Hover subtil pour desktop
+  // Hover premium avec glow subtil
   const logoHover = prefersReducedMotion
     ? {}
     : {
         whileHover: {
-          scale: 1.02,
-          rotateY: 2,
-          filter: "drop-shadow(0 8px 24px hsl(78 32% 59% / 0.2))"
+          scale: 1.03,
+          filter: "drop-shadow(0 0 40px hsl(78 32% 59% / 0.35))"
         },
         transition: {
-          duration: 0.4,
+          duration: 0.5,
           ease: [0.22, 1, 0.36, 1] as const
         }
       };
@@ -142,14 +140,17 @@ const Index = () => {
             <motion.div
               {...breathingAnimation}
               {...logoHover}
-              className="relative"
+              className="relative group cursor-pointer"
             >
-              {/* Halo subtil de profondeur */}
-              <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent blur-3xl scale-150 opacity-60" />
+              {/* Glow effect - halo lumineux premium */}
+              <div className="absolute inset-0 bg-gradient-radial from-primary/15 via-primary/5 to-transparent blur-3xl scale-[2] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <div className="absolute inset-0 bg-gradient-radial from-accent/10 via-transparent to-transparent blur-2xl scale-150 opacity-50" />
+              
+              {/* Logo SVG */}
               <img
-                src={logoHautDeGamme}
-                alt="O P'tit Four Truck - Pâtisserie Traiteur"
-                className="relative h-36 sm:h-44 md:h-52 lg:h-60 xl:h-72 w-auto"
+                src={logoAlicia}
+                alt="O P'tit Four Truck - Alicia Catala - Pâtisserie Traiteur"
+                className="relative h-28 sm:h-36 md:h-44 lg:h-52 xl:h-60 w-auto max-w-[90vw]"
                 decoding="async"
               />
             </motion.div>
