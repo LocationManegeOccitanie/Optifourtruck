@@ -200,11 +200,15 @@ const Index = () => {
                 />
               </div>
               
-              {/* Logo */}
+              {/* Logo - Plus grand et plus net */}
               <img
                 src={logoAlicia}
                 alt="O P'tit Four Truck - Alicia Catala - Pâtisserie Traiteur"
-                className="relative h-32 sm:h-40 md:h-52 lg:h-64 xl:h-72 w-auto max-w-[90vw] drop-shadow-2xl"
+                className="relative h-40 sm:h-52 md:h-64 lg:h-80 xl:h-96 w-auto max-w-[95vw] drop-shadow-[0_8px_32px_rgba(0,0,0,0.15)]"
+                style={{
+                  imageRendering: 'crisp-edges',
+                  WebkitFontSmoothing: 'antialiased'
+                }}
                 decoding="async"
               />
             </motion.div>
