@@ -200,11 +200,11 @@ const Index = () => {
                 />
               </div>
               
-              {/* Logo - Plus grand et plus net */}
+              {/* Logo - Impact visuel maximal */}
               <img
                 src={logoAlicia}
                 alt="O P'tit Four Truck - Alicia Catala - Pâtisserie Traiteur"
-                className="relative h-40 sm:h-52 md:h-64 lg:h-80 xl:h-96 w-auto max-w-[95vw] drop-shadow-[0_8px_32px_rgba(0,0,0,0.15)]"
+                className="relative h-56 sm:h-72 md:h-96 lg:h-[28rem] xl:h-[34rem] w-auto max-w-[98vw] drop-shadow-[0_12px_48px_rgba(0,0,0,0.18)]"
                 style={{
                   imageRendering: 'crisp-edges',
                   WebkitFontSmoothing: 'antialiased'
