@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
+import { Lightbox } from "@/components/premium/Lightbox";
+import { TiltCard } from "@/components/premium/TiltCard";
 import heroPastries from "@/assets/hero-pastries.jpg";
 import chefPortrait from "@/assets/chef-portrait.jpg";
 import petitFours from "@/assets/petit-fours.jpg";
@@ -38,11 +40,18 @@ const galleryImages = [
 
 const Galerie = () => {
   const [activeCategory, setActiveCategory] = useState("all");
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const filteredImages =
     activeCategory === "all"
       ? galleryImages
       : galleryImages.filter((img) => img.category === activeCategory);
+
+  const openLightbox = (index: number) => {
+    setCurrentImageIndex(index);
+    setLightboxOpen(true);
+  };
 
   return (
     <Layout>
@@ -88,7 +97,7 @@ const Galerie = () => {
         </div>
       </section>
 
-      {/* Gallery Grid */}
+      {/* Gallery Grid with TiltCards */}
       <section className="section-padding pt-8">
         <div className="container-wide">
           <motion.div
@@ -104,26 +113,40 @@ const Galerie = () => {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
               >
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.4 }}
-                  className="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer"
+                <TiltCard 
+                  className="perspective-1000 cursor-pointer"
+                  intensity={8}
+                  scaleOnHover={1.02}
                 >
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                    <p className="text-background font-medium">{image.alt}</p>
-                  </div>
-                </motion.div>
+                  <motion.div
+                    onClick={() => openLightbox(index)}
+                    className="group relative aspect-square rounded-2xl overflow-hidden"
+                  >
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                      <p className="text-background font-medium">{image.alt}</p>
+                    </div>
+                  </motion.div>
+                </TiltCard>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
+
+      {/* Lightbox */}
+      <Lightbox
+        images={filteredImages}
+        currentIndex={currentImageIndex}
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+        onNavigate={setCurrentImageIndex}
+      />
 
       {/* CTA */}
       <section className="section-padding bg-accent/30">
