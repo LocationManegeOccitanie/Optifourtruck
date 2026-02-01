@@ -15,7 +15,7 @@ import petitFours from "@/assets/petit-fours.jpg";
 import weddingCake from "@/assets/wedding-cake.jpg";
 import cateringSpread from "@/assets/catering-spread.jpg";
 import macarons from "@/assets/macarons.jpg";
-import logoAlicia from "@/assets/logo-alicia.svg";
+import logoHero from "@/assets/logo-hero.png";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -200,13 +200,13 @@ const Index = () => {
                 />
               </div>
               
-              {/* Logo - Impact visuel maximal */}
+              {/* Logo - Rendu ultra net et professionnel */}
               <img
-                src={logoAlicia}
+                src={logoHero}
                 alt="O P'tit Four Truck - Alicia Catala - Pâtisserie Traiteur"
-                className="relative h-56 sm:h-72 md:h-96 lg:h-[28rem] xl:h-[34rem] w-auto max-w-[98vw] drop-shadow-[0_12px_48px_rgba(0,0,0,0.18)]"
+                className="relative h-32 sm:h-40 md:h-52 lg:h-64 xl:h-80 w-auto max-w-[90vw] drop-shadow-[0_8px_32px_rgba(0,0,0,0.12)]"
                 style={{
-                  imageRendering: 'crisp-edges',
+                  imageRendering: 'auto',
                   WebkitFontSmoothing: 'antialiased'
                 }}
                 decoding="async"
