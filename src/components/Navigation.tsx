@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import logoAlicia from "@/assets/logo-alicia.svg";
+import { ThemeToggle } from "./ThemeToggle";
 
 const navLinks = [
   { name: "Accueil", path: "/" },
@@ -97,13 +98,16 @@ export const Navigation = () => {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <Link
-            to="/devis"
-            className="hidden lg:block btn-primary text-sm py-3 px-6"
-          >
-            Demander un devis
-          </Link>
+          {/* Right side: Theme Toggle + CTA */}
+          <div className="hidden lg:flex items-center gap-4">
+            <ThemeToggle />
+            <Link
+              to="/devis"
+              className="btn-primary text-sm py-3 px-6"
+            >
+              Demander un devis
+            </Link>
+          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -166,10 +170,15 @@ export const Navigation = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
+                className="flex flex-col items-center gap-6"
               >
-                <Link to="/devis" className="btn-primary mt-4">
+                <Link to="/devis" className="btn-primary">
                   Demander un devis
                 </Link>
+                <div className="flex items-center gap-2 text-muted-foreground text-sm">
+                  <span>Thème</span>
+                  <ThemeToggle />
+                </div>
               </motion.div>
             </motion.nav>
           </motion.div>
