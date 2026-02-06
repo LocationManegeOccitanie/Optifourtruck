@@ -1,5 +1,6 @@
 import { Layout } from "@/components/Layout";
 import { RevealSection } from "@/components/RevealSection";
+import { TiltCard } from "@/components/premium/TiltCard";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Heart, Building2, Sparkles, Gift } from "lucide-react";
@@ -111,15 +112,22 @@ const Prestations = () => {
                 direction={index % 2 === 0 ? "left" : "right"}
                 className={index % 2 !== 0 ? "lg:col-start-2" : ""}
               >
-                <div className="aspect-[4/5] rounded-3xl overflow-hidden">
-                  <motion.img
-                    whileHover={{ scale: 1.03 }}
-                    transition={{ duration: 0.6 }}
-                    src={prestation.image}
-                    alt={prestation.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                <TiltCard 
+                  className="perspective-1000 cursor-pointer"
+                  intensity={12}
+                  glareEnabled={true}
+                  scaleOnHover={1.03}
+                >
+                  <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-[var(--shadow-medium)]">
+                    <motion.img
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                      src={prestation.image}
+                      alt={prestation.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </TiltCard>
               </RevealSection>
 
               <RevealSection
