@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import { useOptimizedAnimation, getOptimizedValues } from "@/hooks/useOptimizedAnimation";
+import { EASE, DURATION, VIEWPORT, STAGGER } from "@/lib/animations";
 
 interface TextRevealProps {
   children: ReactNode;
@@ -12,19 +14,27 @@ export const TextReveal = ({
   children, 
   className = "", 
   delay = 0,
-  duration = 0.8
+  duration = DURATION.slow
 }: TextRevealProps) => {
+  const { intensity, shouldAnimate } = useOptimizedAnimation();
+  const optimized = getOptimizedValues(intensity);
+
+  if (!shouldAnimate) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <div className={`overflow-hidden ${className}`}>
       <motion.div
         initial={{ y: "100%", opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
-        viewport={{ once: true, margin: "-50px" }}
+        viewport={VIEWPORT.early}
         transition={{ 
-          duration,
+          duration: optimized.duration || duration,
           delay,
-          ease: [0.22, 1, 0.36, 1]
+          ease: EASE.smooth
         }}
+        style={{ willChange: "transform, opacity" }}
       >
         {children}
       </motion.div>
@@ -43,31 +53,45 @@ export const SplitText = ({
   text, 
   className = "", 
   delay = 0,
-  staggerDelay = 0.03
+  staggerDelay = STAGGER.fast
 }: SplitTextProps) => {
+  const { intensity, shouldAnimate } = useOptimizedAnimation();
+  const optimized = getOptimizedValues(intensity);
   const words = text.split(" ");
+
+  if (!shouldAnimate) {
+    return <span className={className}>{text}</span>;
+  }
+
+  // Reduce stagger on lower-end devices
+  const effectiveStagger = intensity === 'minimal' ? staggerDelay * 2 : staggerDelay;
   
   return (
     <motion.span 
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={VIEWPORT.early}
     >
       {words.map((word, index) => (
         <span key={index} className="inline-block overflow-hidden mr-[0.25em]">
           <motion.span
             className="inline-block"
+            style={{ willChange: "transform, opacity" }}
             variants={{
-              hidden: { y: "100%", opacity: 0, rotateX: -45 },
+              hidden: { 
+                y: "100%", 
+                opacity: 0, 
+                rotateX: intensity === 'full' ? -45 : 0 
+              },
               visible: { 
                 y: 0, 
                 opacity: 1, 
                 rotateX: 0,
                 transition: {
-                  duration: 0.6,
-                  delay: delay + index * staggerDelay,
-                  ease: [0.22, 1, 0.36, 1]
+                  duration: optimized.duration || DURATION.normal,
+                  delay: delay + index * effectiveStagger,
+                  ease: EASE.smooth
                 }
               }
             }}
@@ -75,6 +99,67 @@ export const SplitText = ({
             {word}
           </motion.span>
         </span>
+      ))}
+    </motion.span>
+  );
+};
+
+/**
+ * Character-by-character reveal for dramatic headings
+ */
+interface CharacterRevealProps {
+  text: string;
+  className?: string;
+  delay?: number;
+}
+
+export const CharacterReveal = ({
+  text,
+  className = "",
+  delay = 0,
+}: CharacterRevealProps) => {
+  const { intensity, shouldAnimate } = useOptimizedAnimation();
+  const characters = text.split("");
+
+  if (!shouldAnimate || intensity === 'minimal') {
+    return <span className={className}>{text}</span>;
+  }
+
+  return (
+    <motion.span 
+      className={className}
+      initial="hidden"
+      whileInView="visible"
+      viewport={VIEWPORT.early}
+    >
+      {characters.map((char, index) => (
+        <motion.span
+          key={index}
+          className="inline-block"
+          style={{ 
+            willChange: "transform, opacity",
+            whiteSpace: char === " " ? "pre" : "normal"
+          }}
+          variants={{
+            hidden: { 
+              opacity: 0,
+              y: 20,
+              filter: "blur(4px)"
+            },
+            visible: { 
+              opacity: 1,
+              y: 0,
+              filter: "blur(0px)",
+              transition: {
+                duration: DURATION.fast,
+                delay: delay + index * 0.02,
+                ease: EASE.smooth
+              }
+            }
+          }}
+        >
+          {char}
+        </motion.span>
       ))}
     </motion.span>
   );
