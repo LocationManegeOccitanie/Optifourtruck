@@ -8,6 +8,7 @@ import { AnimatePresence } from "framer-motion";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { PageLoader } from "@/components/premium/PageLoader";
 import { PageTransition } from "@/components/premium/PageTransition";
+import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import Index from "./pages/Index";
 import SavoirFaire from "./pages/SavoirFaire";
 import Prestations from "./pages/Prestations";
@@ -43,13 +44,15 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        {!isLoaded && <PageLoader onLoadComplete={() => setIsLoaded(true)} />}
-        <BrowserRouter>
-          <ScrollToTop />
-          <AnimatedRoutes />
-        </BrowserRouter>
+        <SmoothScrollProvider>
+          <Toaster />
+          <Sonner />
+          {!isLoaded && <PageLoader onLoadComplete={() => setIsLoaded(true)} />}
+          <BrowserRouter>
+            <ScrollToTop />
+            <AnimatedRoutes />
+          </BrowserRouter>
+        </SmoothScrollProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );

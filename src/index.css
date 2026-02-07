@@ -155,12 +155,45 @@
   }
   
   html {
-    scroll-behavior: smooth;
+    /* Smooth scroll handled by Lenis on desktop */
+    scroll-behavior: auto;
+  }
+  
+  /* Fallback for mobile or when Lenis is disabled */
+  @media (max-width: 1023px) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+  
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
   
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'DM Sans', sans-serif;
+    /* Hide default cursor on desktop when custom cursor is active */
+  }
+  
+  /* Hide cursor on desktop for custom cursor */
+  @media (min-width: 1024px) {
+    body:has(.custom-cursor-active) {
+      cursor: none;
+    }
+    
+    body:has(.custom-cursor-active) a,
+    body:has(.custom-cursor-active) button {
+      cursor: none;
+    }
   }
   
   h1, h2, h3, h4, h5, h6 {
