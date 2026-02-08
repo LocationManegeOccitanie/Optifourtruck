@@ -213,14 +213,14 @@ const Devis = () => {
                     Une question ? Contactez-nous :
                   </p>
                   <div className="space-y-2 text-sm">
-                    <div className="flex items-center gap-2 text-muted-foreground">
+                    <a href="tel:0656829711" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
                       <Phone size={14} className="text-primary" />
-                      <span>06 XX XX XX XX</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-muted-foreground">
+                      <span>06 56 82 97 11</span>
+                    </a>
+                    <a href="mailto:optifourtruck.contact@gmail.com" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
                       <Mail size={14} className="text-primary" />
-                      <span className="text-xs">contact@optitfourtruck.fr</span>
-                    </div>
+                      <span className="text-xs">optifourtruck.contact@gmail.com</span>
+                    </a>
                   </div>
                 </div>
               </div>
