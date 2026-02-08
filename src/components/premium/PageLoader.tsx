@@ -7,7 +7,7 @@ interface PageLoaderProps {
   minimumLoadTime?: number;
 }
 
-export const PageLoader = ({ onLoadComplete, minimumLoadTime = 2500 }: PageLoaderProps) => {
+export const PageLoader = ({ onLoadComplete, minimumLoadTime = 1800 }: PageLoaderProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
 
