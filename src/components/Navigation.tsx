@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -120,70 +121,41 @@ export const Navigation = () => {
         </nav>
       </motion.header>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 lg:hidden bg-background"
-          >
-            <motion.nav
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="flex flex-col items-center justify-center h-full gap-8"
+      {/* Mobile Menu - rendered via portal to escape PageTransition transform scope */}
+      {isOpen && createPortal(
+        <div className="fixed inset-0 z-[45] lg:hidden bg-background flex flex-col items-center justify-center gap-8">
+          {/* Mobile Logo */}
+          <img 
+            src={logoAlicia} 
+            alt="O P'tit Four Truck" 
+            className="h-24 mb-4"
+          />
+          
+          {navLinks.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              className={`font-display text-3xl transition-colors ${
+                location.pathname === link.path 
+                  ? "text-primary" 
+                  : "text-foreground hover:text-primary"
+              }`}
             >
-              {/* Mobile Logo */}
-              <motion.img 
-                src={logoAlicia} 
-                alt="O P'tit Four Truck" 
-                className="h-24 mb-4"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-              />
-              
-              {navLinks.map((link, index) => (
-                <motion.div
-                  key={link.path}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + index * 0.05 }}
-                >
-                  <Link
-                    to={link.path}
-                    className={`font-display text-3xl transition-colors ${
-                      location.pathname === link.path 
-                        ? "text-primary" 
-                        : "text-foreground hover:text-primary"
-                    }`}
-                  >
-                    {link.name}
-                  </Link>
-                </motion.div>
-              ))}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="flex flex-col items-center gap-6"
-              >
-                <Link to="/devis" className="btn-primary">
-                  Demander un devis
-                </Link>
-                <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                  <span>Thème</span>
-                  <ThemeToggle />
-                </div>
-              </motion.div>
-            </motion.nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              {link.name}
+            </Link>
+          ))}
+          <div className="flex flex-col items-center gap-6 mt-4">
+            <Link to="/devis" className="btn-primary">
+              Demander un devis
+            </Link>
+            <div className="flex items-center gap-2 text-muted-foreground text-sm">
+              <span>Thème</span>
+              <ThemeToggle />
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
     </>
   );
 };
