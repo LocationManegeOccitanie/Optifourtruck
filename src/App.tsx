@@ -9,6 +9,7 @@ import { ScrollToTop } from "@/components/ScrollToTop";
 import { PageLoader } from "@/components/premium/PageLoader";
 import { PageTransition } from "@/components/premium/PageTransition";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
+import { FloatingContact } from "@/components/FloatingContact";
 import Index from "./pages/Index";
 import SavoirFaire from "./pages/SavoirFaire";
 import Prestations from "./pages/Prestations";
@@ -50,6 +51,7 @@ const App = () => {
           {!isLoaded && <PageLoader onLoadComplete={() => setIsLoaded(true)} />}
           <BrowserRouter>
             <ScrollToTop />
+            <FloatingContact />
             <AnimatedRoutes />
           </BrowserRouter>
         </SmoothScrollProvider>
