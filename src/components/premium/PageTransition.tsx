@@ -126,44 +126,42 @@ export const PageTransition = ({ children }: PageTransitionProps) => {
   }
 
   return (
-    <AnimatePresence mode="wait" initial={false}>
-      <motion.div
-        key={location.pathname}
-        initial="initial"
-        animate="enter"
-        exit="exit"
+    <motion.div
+      key={location.pathname}
+      initial="initial"
+      animate="enter"
+      exit="exit"
+      style={{ willChange: "transform, opacity, filter" }}
+    >
+      {/* Curtain overlay - primary color */}
+      {(intensity === 'full' || intensity === 'reduced') && (
+        <>
+          <motion.div
+            variants={curtainVariants}
+            className="fixed inset-0 z-[100] bg-primary origin-top pointer-events-none"
+            style={{ willChange: "transform" }}
+          />
+          <motion.div
+            variants={curtainVariants}
+            className="fixed inset-0 z-[99] bg-background origin-bottom pointer-events-none"
+            style={{ 
+              willChange: "transform",
+              transitionDelay: "0.05s" 
+            }}
+          />
+        </>
+      )}
+      
+      {/* Page content with stagger */}
+      <motion.div 
+        variants={pageVariants}
         style={{ willChange: "transform, opacity, filter" }}
       >
-        {/* Curtain overlay - primary color */}
-        {(intensity === 'full' || intensity === 'reduced') && (
-          <>
-            <motion.div
-              variants={curtainVariants}
-              className="fixed inset-0 z-[100] bg-primary origin-top pointer-events-none"
-              style={{ willChange: "transform" }}
-            />
-            <motion.div
-              variants={curtainVariants}
-              className="fixed inset-0 z-[99] bg-background origin-bottom pointer-events-none"
-              style={{ 
-                willChange: "transform",
-                transitionDelay: "0.05s" 
-              }}
-            />
-          </>
-        )}
-        
-        {/* Page content with stagger */}
-        <motion.div 
-          variants={pageVariants}
-          style={{ willChange: "transform, opacity, filter" }}
-        >
-          <motion.div variants={contentStaggerVariants}>
-            {children}
-          </motion.div>
+        <motion.div variants={contentStaggerVariants}>
+          {children}
         </motion.div>
       </motion.div>
-    </AnimatePresence>
+    </motion.div>
   );
 };
 
