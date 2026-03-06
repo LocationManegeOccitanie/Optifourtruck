@@ -17,6 +17,7 @@ import gateauAnniversaire from "@/assets/gateau-anniversaire.jpg";
 import plateauCharcuterie from "@/assets/plateau-charcuterie.jpg";
 import tarteFruits from "@/assets/tarte-fruits.png";
 import lettreFruits from "@/assets/lettre-fruits.png";
+import gateauMinnie from "@/assets/gateau-minnie.png";
 
 const categories = [
   { id: "all", name: "Tout" },
