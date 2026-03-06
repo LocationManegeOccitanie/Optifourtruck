@@ -36,6 +36,7 @@ const galleryImages = [
   { src: cateringSpread, alt: "Buffet traiteur", category: "traiteur" },
   { src: gateauMinnie, alt: "Gâteau d'anniversaire thème Minnie", category: "evenements" },
   { src: macarons, alt: "Macarons artisanaux", category: "patisserie" },
+  { src: numberCake49, alt: "Number cake 49 aux macarons et chocolat blanc", category: "evenements" },
   { src: plateauCharcuterie, alt: "Plateau charcuterie et fromages", category: "traiteur" },
   { src: saintHonore, alt: "Saint-Honoré caramel et crème vanille", category: "patisserie" },
   { src: gateauAnniversaire, alt: "Gâteau d'anniversaire glacé", category: "evenements" },
