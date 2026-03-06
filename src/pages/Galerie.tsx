@@ -20,6 +20,7 @@ import lettreFruits from "@/assets/lettre-fruits.png";
 import gateauMinnie from "@/assets/gateau-minnie.png";
 import saintHonore from "@/assets/saint-honore.png";
 import coeurFruits from "@/assets/coeur-fruits.png";
+import numberCake49 from "@/assets/number-cake-49.png";
 
 const categories = [
   { id: "all", name: "Tout" },
