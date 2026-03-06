@@ -16,6 +16,7 @@ import galetteDesRois from "@/assets/galette-des-rois.jpg";
 import gateauAnniversaire from "@/assets/gateau-anniversaire.jpg";
 import plateauCharcuterie from "@/assets/plateau-charcuterie.jpg";
 import tarteFruits from "@/assets/tarte-fruits.png";
+import lettreFruits from "@/assets/lettre-fruits.png";
 
 const categories = [
   { id: "all", name: "Tout" },
@@ -31,6 +32,7 @@ const galleryImages = [
   { src: weddingCake, alt: "Wedding cake", category: "evenements" },
   { src: macarons, alt: "Macarons artisanaux", category: "patisserie" },
   { src: gateauAnniversaire, alt: "Gâteau d'anniversaire glacé", category: "evenements" },
+  { src: lettreFruits, alt: "Lettre en biscuit aux fruits exotiques", category: "patisserie" },
   { src: cateringSpread, alt: "Buffet traiteur", category: "traiteur" },
   { src: plateauCharcuterie, alt: "Plateau charcuterie et fromages", category: "traiteur" },
   { src: petitFours, alt: "Petit fours", category: "patisserie" },
