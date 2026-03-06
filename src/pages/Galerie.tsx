@@ -19,6 +19,7 @@ import tarteFruits from "@/assets/tarte-fruits.png";
 import lettreFruits from "@/assets/lettre-fruits.png";
 import gateauMinnie from "@/assets/gateau-minnie.png";
 import saintHonore from "@/assets/saint-honore.png";
+import coeurFruits from "@/assets/coeur-fruits.png";
 
 const categories = [
   { id: "all", name: "Tout" },
@@ -37,10 +38,11 @@ const galleryImages = [
   { src: plateauCharcuterie, alt: "Plateau charcuterie et fromages", category: "traiteur" },
   { src: saintHonore, alt: "Saint-Honoré caramel et crème vanille", category: "patisserie" },
   { src: gateauAnniversaire, alt: "Gâteau d'anniversaire glacé", category: "evenements" },
-  { src: lettreFruits, alt: "Lettre en biscuit aux fruits exotiques", category: "patisserie" },
-  { src: petitFours, alt: "Petit fours", category: "patisserie" },
-  { src: chefPortrait, alt: "Alicia en cuisine", category: "evenements" },
+  { src: coeurFruits, alt: "Cœur number cake aux fruits rouges et macarons", category: "patisserie" },
   { src: cateringSpread, alt: "Réception", category: "traiteur" },
+  { src: lettreFruits, alt: "Lettre en biscuit aux fruits exotiques", category: "patisserie" },
+  { src: chefPortrait, alt: "Alicia en cuisine", category: "evenements" },
+  { src: petitFours, alt: "Petit fours", category: "patisserie" },
   { src: macarons, alt: "Macarons colorés", category: "patisserie" },
   { src: galetteDesRois, alt: "Galette des rois artisanale", category: "patisserie" },
   { src: heroPastries, alt: "Créations sucrées", category: "patisserie" },
