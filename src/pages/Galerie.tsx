@@ -18,6 +18,7 @@ import plateauCharcuterie from "@/assets/plateau-charcuterie.jpg";
 import tarteFruits from "@/assets/tarte-fruits.png";
 import lettreFruits from "@/assets/lettre-fruits.png";
 import gateauMinnie from "@/assets/gateau-minnie.png";
+import saintHonore from "@/assets/saint-honore.png";
 
 const categories = [
   { id: "all", name: "Tout" },
@@ -34,13 +35,14 @@ const galleryImages = [
   { src: gateauMinnie, alt: "Gâteau d'anniversaire thème Minnie", category: "evenements" },
   { src: macarons, alt: "Macarons artisanaux", category: "patisserie" },
   { src: plateauCharcuterie, alt: "Plateau charcuterie et fromages", category: "traiteur" },
-  { src: galetteDesRois, alt: "Galette des rois artisanale", category: "patisserie" },
+  { src: saintHonore, alt: "Saint-Honoré caramel et crème vanille", category: "patisserie" },
   { src: gateauAnniversaire, alt: "Gâteau d'anniversaire glacé", category: "evenements" },
   { src: lettreFruits, alt: "Lettre en biscuit aux fruits exotiques", category: "patisserie" },
   { src: petitFours, alt: "Petit fours", category: "patisserie" },
   { src: chefPortrait, alt: "Alicia en cuisine", category: "evenements" },
   { src: cateringSpread, alt: "Réception", category: "traiteur" },
   { src: macarons, alt: "Macarons colorés", category: "patisserie" },
+  { src: galetteDesRois, alt: "Galette des rois artisanale", category: "patisserie" },
   { src: heroPastries, alt: "Créations sucrées", category: "patisserie" },
 ];
 
