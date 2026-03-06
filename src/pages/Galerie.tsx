@@ -15,6 +15,7 @@ import macarons from "@/assets/macarons.jpg";
 import galetteDesRois from "@/assets/galette-des-rois.jpg";
 import gateauAnniversaire from "@/assets/gateau-anniversaire.jpg";
 import plateauCharcuterie from "@/assets/plateau-charcuterie.jpg";
+import tarteFruits from "@/assets/tarte-fruits.png";
 
 const categories = [
   { id: "all", name: "Tout" },
@@ -25,6 +26,7 @@ const categories = [
 
 const galleryImages = [
   { src: heroPastries, alt: "Assortiment de pâtisseries", category: "patisserie" },
+  { src: tarteFruits, alt: "Tarte aux fruits frais de saison", category: "patisserie" },
   { src: galetteDesRois, alt: "Galette des rois artisanale", category: "patisserie" },
   { src: weddingCake, alt: "Wedding cake", category: "evenements" },
   { src: macarons, alt: "Macarons artisanaux", category: "patisserie" },
