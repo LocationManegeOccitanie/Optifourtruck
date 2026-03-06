@@ -15,6 +15,7 @@ import macarons from "@/assets/macarons.jpg";
 import galetteDesRois from "@/assets/galette-des-rois.jpg";
 import gateauAnniversaire from "@/assets/gateau-anniversaire.jpg";
 import plateauCharcuterie from "@/assets/plateau-charcuterie.jpg";
+import tarteFruits from "@/assets/tarte-fruits.png";
 
 const categories = [
   { id: "all", name: "Tout" },
