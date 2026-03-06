@@ -28,19 +28,20 @@ const categories = [
 
 const galleryImages = [
   { src: heroPastries, alt: "Assortiment de pâtisseries", category: "patisserie" },
-  { src: tarteFruits, alt: "Tarte aux fruits frais de saison", category: "patisserie" },
-  { src: galetteDesRois, alt: "Galette des rois artisanale", category: "patisserie" },
   { src: weddingCake, alt: "Wedding cake", category: "evenements" },
+  { src: tarteFruits, alt: "Tarte aux fruits frais de saison", category: "patisserie" },
+  { src: cateringSpread, alt: "Buffet traiteur", category: "traiteur" },
+  { src: gateauMinnie, alt: "Gâteau d'anniversaire thème Minnie", category: "evenements" },
   { src: macarons, alt: "Macarons artisanaux", category: "patisserie" },
+  { src: plateauCharcuterie, alt: "Plateau charcuterie et fromages", category: "traiteur" },
+  { src: galetteDesRois, alt: "Galette des rois artisanale", category: "patisserie" },
   { src: gateauAnniversaire, alt: "Gâteau d'anniversaire glacé", category: "evenements" },
   { src: lettreFruits, alt: "Lettre en biscuit aux fruits exotiques", category: "patisserie" },
-  { src: cateringSpread, alt: "Buffet traiteur", category: "traiteur" },
-  { src: plateauCharcuterie, alt: "Plateau charcuterie et fromages", category: "traiteur" },
   { src: petitFours, alt: "Petit fours", category: "patisserie" },
   { src: chefPortrait, alt: "Alicia en cuisine", category: "evenements" },
-  { src: heroPastries, alt: "Créations sucrées", category: "patisserie" },
   { src: cateringSpread, alt: "Réception", category: "traiteur" },
   { src: macarons, alt: "Macarons colorés", category: "patisserie" },
+  { src: heroPastries, alt: "Créations sucrées", category: "patisserie" },
 ];
 
 const Galerie = () => {
