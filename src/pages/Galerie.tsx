@@ -20,6 +20,7 @@ import lettreFruits from "@/assets/lettre-fruits.png";
 import gateauMinnie from "@/assets/gateau-minnie.png";
 import saintHonore from "@/assets/saint-honore.png";
 import coeurFruits from "@/assets/coeur-fruits.png";
+import numberCake49 from "@/assets/number-cake-49.png";
 
 const categories = [
   { id: "all", name: "Tout" },
@@ -35,6 +36,7 @@ const galleryImages = [
   { src: cateringSpread, alt: "Buffet traiteur", category: "traiteur" },
   { src: gateauMinnie, alt: "Gâteau d'anniversaire thème Minnie", category: "evenements" },
   { src: macarons, alt: "Macarons artisanaux", category: "patisserie" },
+  { src: numberCake49, alt: "Number cake 49 aux macarons et chocolat blanc", category: "evenements" },
   { src: plateauCharcuterie, alt: "Plateau charcuterie et fromages", category: "traiteur" },
   { src: saintHonore, alt: "Saint-Honoré caramel et crème vanille", category: "patisserie" },
   { src: gateauAnniversaire, alt: "Gâteau d'anniversaire glacé", category: "evenements" },
