@@ -26,6 +26,7 @@ const categories = [
 
 const galleryImages = [
   { src: heroPastries, alt: "Assortiment de pâtisseries", category: "patisserie" },
+  { src: tarteFruits, alt: "Tarte aux fruits frais de saison", category: "patisserie" },
   { src: galetteDesRois, alt: "Galette des rois artisanale", category: "patisserie" },
   { src: weddingCake, alt: "Wedding cake", category: "evenements" },
   { src: macarons, alt: "Macarons artisanaux", category: "patisserie" },
