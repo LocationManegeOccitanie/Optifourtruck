@@ -495,12 +495,12 @@ const Index = () => {
             viewport={{ once: true, margin: "-100px" }}
           >
             {[
-              { image: heroPastries, span: "md:col-span-2 md:row-span-2" },
-              { image: macarons, span: "" },
-              { image: petitFours, span: "" },
-              { image: weddingCake, span: "md:col-span-2" },
-              { image: cateringSpread, span: "" },
-              { image: chefPortrait, span: "" },
+              { image: tarteFruits, span: "md:col-span-2 md:row-span-2" },
+              { image: numberCake49, span: "" },
+              { image: bucheCaramel, span: "" },
+              { image: gateauMinnie, span: "md:col-span-2" },
+              { image: misesEnBouche, span: "" },
+              { image: saintHonore, span: "" },
             ].map((item, index) => (
               <motion.div
                 key={index}
