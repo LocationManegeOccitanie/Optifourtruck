@@ -13,7 +13,7 @@ import weddingCake from "@/assets/wedding-cake.jpg";
 import cateringSpread from "@/assets/catering-spread.jpg";
 import macarons from "@/assets/macarons.jpg";
 import galetteDesRois from "@/assets/galette-des-rois.jpg";
-import gateauAnniversaire from "@/assets/gateau-anniversaire.jpg";
+import bucheCaramel from "@/assets/buche-caramel.png";
 import plateauCharcuterie from "@/assets/plateau-charcuterie.jpg";
 import tarteFruits from "@/assets/tarte-fruits.png";
 import lettreFruits from "@/assets/lettre-fruits.png";
