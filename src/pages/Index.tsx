@@ -9,12 +9,12 @@ import { ImageReveal } from "@/components/ImageReveal";
 import { FloatingElements } from "@/components/FloatingElements";
 import { HeroParallax } from "@/components/HeroParallax";
 import { CountUp } from "@/components/CountUp";
-import heroPastries from "@/assets/hero-pastries.jpg";
-import chefPortrait from "@/assets/chef-portrait.jpg";
-import petitFours from "@/assets/petit-fours.jpg";
-import weddingCake from "@/assets/wedding-cake.jpg";
-import cateringSpread from "@/assets/catering-spread.jpg";
-import macarons from "@/assets/macarons.jpg";
+import tarteFruits from "@/assets/tarte-fruits.png";
+import saintHonore from "@/assets/saint-honore.png";
+import gateauMinnie from "@/assets/gateau-minnie.png";
+import bucheCaramel from "@/assets/buche-caramel.png";
+import misesEnBouche from "@/assets/mises-en-bouche.png";
+import numberCake49 from "@/assets/number-cake-49.png";
 import logoHero from "@/assets/logo-hero.png";
 
 const containerVariants = {
