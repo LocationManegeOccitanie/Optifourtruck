@@ -9,12 +9,12 @@ import { ImageReveal } from "@/components/ImageReveal";
 import { FloatingElements } from "@/components/FloatingElements";
 import { HeroParallax } from "@/components/HeroParallax";
 import { CountUp } from "@/components/CountUp";
-import heroPastries from "@/assets/hero-pastries.jpg";
-import chefPortrait from "@/assets/chef-portrait.jpg";
-import petitFours from "@/assets/petit-fours.jpg";
-import weddingCake from "@/assets/wedding-cake.jpg";
-import cateringSpread from "@/assets/catering-spread.jpg";
-import macarons from "@/assets/macarons.jpg";
+import tarteFruits from "@/assets/tarte-fruits.png";
+import saintHonore from "@/assets/saint-honore.png";
+import gateauMinnie from "@/assets/gateau-minnie.png";
+import bucheCaramel from "@/assets/buche-caramel.png";
+import misesEnBouche from "@/assets/mises-en-bouche.png";
+import numberCake49 from "@/assets/number-cake-49.png";
 import logoHero from "@/assets/logo-hero.png";
 
 const containerVariants = {
@@ -148,7 +148,7 @@ const Index = () => {
     <Layout>
       {/* Hero Section - Full cinematic experience */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <HeroParallax src={heroPastries} alt="Pâtisseries artisanales" />
+        <HeroParallax src={tarteFruits} alt="Pâtisseries artisanales" />
         <FloatingElements />
 
         {/* Premium content container */}
@@ -316,7 +316,7 @@ const Index = () => {
             <RevealSection direction="left">
               <div className="relative">
                 <ImageReveal 
-                  src={chefPortrait}
+                  src={saintHonore}
                   alt="Alicia Catala, chef pâtissière"
                   className="aspect-[3/4] rounded-3xl"
                   direction="left"
@@ -411,17 +411,17 @@ const Index = () => {
           >
             {[
               {
-                image: weddingCake,
+                image: gateauMinnie,
                 title: "Événements privés",
                 description: "Mariages, anniversaires, baptêmes... Sublimez vos moments précieux.",
               },
               {
-                image: cateringSpread,
+                image: misesEnBouche,
                 title: "Événements professionnels",
                 description: "Séminaires, inaugurations, cocktails... Impressionnez vos invités.",
               },
               {
-                image: petitFours,
+                image: bucheCaramel,
                 title: "Prestations sur-mesure",
                 description: "Des créations uniques pensées selon vos goûts et vos envies.",
               },
@@ -495,12 +495,12 @@ const Index = () => {
             viewport={{ once: true, margin: "-100px" }}
           >
             {[
-              { image: heroPastries, span: "md:col-span-2 md:row-span-2" },
-              { image: macarons, span: "" },
-              { image: petitFours, span: "" },
-              { image: weddingCake, span: "md:col-span-2" },
-              { image: cateringSpread, span: "" },
-              { image: chefPortrait, span: "" },
+              { image: tarteFruits, span: "md:col-span-2 md:row-span-2" },
+              { image: numberCake49, span: "" },
+              { image: bucheCaramel, span: "" },
+              { image: gateauMinnie, span: "md:col-span-2" },
+              { image: misesEnBouche, span: "" },
+              { image: saintHonore, span: "" },
             ].map((item, index) => (
               <motion.div
                 key={index}
