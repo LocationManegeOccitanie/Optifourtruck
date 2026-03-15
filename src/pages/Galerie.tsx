@@ -21,6 +21,7 @@ import gateauMinnie from "@/assets/gateau-minnie.png";
 import saintHonore from "@/assets/saint-honore.png";
 import coeurFruits from "@/assets/coeur-fruits.png";
 import numberCake49 from "@/assets/number-cake-49.png";
+import bavaroisFruitsRouges from "@/assets/bavarois-fruits-rouges.png";
 
 const categories = [
   { id: "all", name: "Tout" },
@@ -40,6 +41,7 @@ const galleryImages = [
   { src: plateauCharcuterie, alt: "Plateau charcuterie et fromages", category: "traiteur" },
   { src: saintHonore, alt: "Saint-Honoré caramel et crème vanille", category: "patisserie" },
   { src: gateauAnniversaire, alt: "Gâteau d'anniversaire glacé", category: "evenements" },
+  { src: bavaroisFruitsRouges, alt: "Bavarois glacé aux fruits rouges et chocolat", category: "patisserie" },
   { src: coeurFruits, alt: "Cœur number cake aux fruits rouges et macarons", category: "patisserie" },
   { src: cateringSpread, alt: "Réception", category: "traiteur" },
   { src: lettreFruits, alt: "Lettre en biscuit aux fruits exotiques", category: "patisserie" },
