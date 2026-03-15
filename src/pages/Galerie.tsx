@@ -41,6 +41,7 @@ const galleryImages = [
   { src: plateauCharcuterie, alt: "Plateau charcuterie et fromages", category: "traiteur" },
   { src: saintHonore, alt: "Saint-Honoré caramel et crème vanille", category: "patisserie" },
   { src: gateauAnniversaire, alt: "Gâteau d'anniversaire glacé", category: "evenements" },
+  { src: bavaroisFruitsRouges, alt: "Bavarois glacé aux fruits rouges et chocolat", category: "patisserie" },
   { src: coeurFruits, alt: "Cœur number cake aux fruits rouges et macarons", category: "patisserie" },
   { src: cateringSpread, alt: "Réception", category: "traiteur" },
   { src: lettreFruits, alt: "Lettre en biscuit aux fruits exotiques", category: "patisserie" },
