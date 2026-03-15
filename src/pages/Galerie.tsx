@@ -6,12 +6,6 @@ import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { Lightbox } from "@/components/premium/Lightbox";
 import { TiltCard } from "@/components/premium/TiltCard";
-import heroPastries from "@/assets/hero-pastries.jpg";
-import chefPortrait from "@/assets/chef-portrait.jpg";
-import petitFours from "@/assets/petit-fours.jpg";
-import weddingCake from "@/assets/wedding-cake.jpg";
-import cateringSpread from "@/assets/catering-spread.jpg";
-import macarons from "@/assets/macarons.jpg";
 import galetteDesRois from "@/assets/galette-des-rois.jpg";
 import bucheCaramel from "@/assets/buche-caramel.png";
 import plateauCharcuterie from "@/assets/plateau-charcuterie.jpg";
@@ -22,6 +16,7 @@ import saintHonore from "@/assets/saint-honore.png";
 import coeurFruits from "@/assets/coeur-fruits.png";
 import numberCake49 from "@/assets/number-cake-49.png";
 import bavaroisFruitsRouges from "@/assets/bavarois-fruits-rouges.png";
+import misesEnBouche from "@/assets/mises-en-bouche.png";
 
 const categories = [
   { id: "all", name: "Tout" },
