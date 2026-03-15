@@ -13,7 +13,7 @@ import weddingCake from "@/assets/wedding-cake.jpg";
 import cateringSpread from "@/assets/catering-spread.jpg";
 import macarons from "@/assets/macarons.jpg";
 import galetteDesRois from "@/assets/galette-des-rois.jpg";
-import gateauAnniversaire from "@/assets/gateau-anniversaire.jpg";
+import bucheCaramel from "@/assets/buche-caramel.png";
 import plateauCharcuterie from "@/assets/plateau-charcuterie.jpg";
 import tarteFruits from "@/assets/tarte-fruits.png";
 import lettreFruits from "@/assets/lettre-fruits.png";
@@ -40,7 +40,7 @@ const galleryImages = [
   { src: numberCake49, alt: "Number cake 49 aux macarons et chocolat blanc", category: "evenements" },
   { src: plateauCharcuterie, alt: "Plateau charcuterie et fromages", category: "traiteur" },
   { src: saintHonore, alt: "Saint-Honoré caramel et crème vanille", category: "patisserie" },
-  { src: gateauAnniversaire, alt: "Gâteau d'anniversaire glacé", category: "evenements" },
+  { src: bucheCaramel, alt: "Bûche glacée caramel et fruits rouges", category: "patisserie" },
   { src: bavaroisFruitsRouges, alt: "Bavarois glacé aux fruits rouges et chocolat", category: "patisserie" },
   { src: coeurFruits, alt: "Cœur number cake aux fruits rouges et macarons", category: "patisserie" },
   { src: cateringSpread, alt: "Réception", category: "traiteur" },
