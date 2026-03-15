@@ -148,7 +148,7 @@ const Index = () => {
     <Layout>
       {/* Hero Section - Full cinematic experience */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <HeroParallax src={heroPastries} alt="Pâtisseries artisanales" />
+        <HeroParallax src={tarteFruits} alt="Pâtisseries artisanales" />
         <FloatingElements />
 
         {/* Premium content container */}
