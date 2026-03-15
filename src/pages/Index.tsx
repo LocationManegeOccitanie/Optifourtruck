@@ -316,7 +316,7 @@ const Index = () => {
             <RevealSection direction="left">
               <div className="relative">
                 <ImageReveal 
-                  src={chefPortrait}
+                  src={saintHonore}
                   alt="Alicia Catala, chef pâtissière"
                   className="aspect-[3/4] rounded-3xl"
                   direction="left"
