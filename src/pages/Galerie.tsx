@@ -6,12 +6,6 @@ import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { Lightbox } from "@/components/premium/Lightbox";
 import { TiltCard } from "@/components/premium/TiltCard";
-import heroPastries from "@/assets/hero-pastries.jpg";
-import chefPortrait from "@/assets/chef-portrait.jpg";
-import petitFours from "@/assets/petit-fours.jpg";
-import weddingCake from "@/assets/wedding-cake.jpg";
-import cateringSpread from "@/assets/catering-spread.jpg";
-import macarons from "@/assets/macarons.jpg";
 import galetteDesRois from "@/assets/galette-des-rois.jpg";
 import bucheCaramel from "@/assets/buche-caramel.png";
 import plateauCharcuterie from "@/assets/plateau-charcuterie.jpg";
@@ -22,6 +16,7 @@ import saintHonore from "@/assets/saint-honore.png";
 import coeurFruits from "@/assets/coeur-fruits.png";
 import numberCake49 from "@/assets/number-cake-49.png";
 import bavaroisFruitsRouges from "@/assets/bavarois-fruits-rouges.png";
+import misesEnBouche from "@/assets/mises-en-bouche.png";
 
 const categories = [
   { id: "all", name: "Tout" },
@@ -31,25 +26,17 @@ const categories = [
 ];
 
 const galleryImages = [
-  { src: heroPastries, alt: "Assortiment de pâtisseries", category: "patisserie" },
-  { src: weddingCake, alt: "Wedding cake", category: "evenements" },
   { src: tarteFruits, alt: "Tarte aux fruits frais de saison", category: "patisserie" },
-  { src: cateringSpread, alt: "Buffet traiteur", category: "traiteur" },
-  { src: gateauMinnie, alt: "Gâteau d'anniversaire thème Minnie", category: "evenements" },
-  { src: macarons, alt: "Macarons artisanaux", category: "patisserie" },
-  { src: numberCake49, alt: "Number cake 49 aux macarons et chocolat blanc", category: "evenements" },
-  { src: plateauCharcuterie, alt: "Plateau charcuterie et fromages", category: "traiteur" },
   { src: saintHonore, alt: "Saint-Honoré caramel et crème vanille", category: "patisserie" },
+  { src: gateauMinnie, alt: "Gâteau d'anniversaire thème Minnie", category: "evenements" },
+  { src: misesEnBouche, alt: "Plateau de mises en bouche gourmandes", category: "traiteur" },
   { src: bucheCaramel, alt: "Bûche glacée caramel et fruits rouges", category: "patisserie" },
+  { src: numberCake49, alt: "Number cake 49 aux macarons et chocolat blanc", category: "evenements" },
   { src: bavaroisFruitsRouges, alt: "Bavarois glacé aux fruits rouges et chocolat", category: "patisserie" },
+  { src: plateauCharcuterie, alt: "Plateau charcuterie et fromages", category: "traiteur" },
   { src: coeurFruits, alt: "Cœur number cake aux fruits rouges et macarons", category: "patisserie" },
-  { src: cateringSpread, alt: "Réception", category: "traiteur" },
-  { src: lettreFruits, alt: "Lettre en biscuit aux fruits exotiques", category: "patisserie" },
-  { src: chefPortrait, alt: "Alicia en cuisine", category: "evenements" },
-  { src: petitFours, alt: "Petit fours", category: "patisserie" },
-  { src: macarons, alt: "Macarons colorés", category: "patisserie" },
   { src: galetteDesRois, alt: "Galette des rois artisanale", category: "patisserie" },
-  { src: heroPastries, alt: "Créations sucrées", category: "patisserie" },
+  { src: lettreFruits, alt: "Lettre en biscuit aux fruits exotiques", category: "patisserie" },
 ];
 
 const Galerie = () => {
