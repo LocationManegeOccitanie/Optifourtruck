@@ -411,17 +411,17 @@ const Index = () => {
           >
             {[
               {
-                image: weddingCake,
+                image: gateauMinnie,
                 title: "Événements privés",
                 description: "Mariages, anniversaires, baptêmes... Sublimez vos moments précieux.",
               },
               {
-                image: cateringSpread,
+                image: misesEnBouche,
                 title: "Événements professionnels",
                 description: "Séminaires, inaugurations, cocktails... Impressionnez vos invités.",
               },
               {
-                image: petitFours,
+                image: bucheCaramel,
                 title: "Prestations sur-mesure",
                 description: "Des créations uniques pensées selon vos goûts et vos envies.",
               },
