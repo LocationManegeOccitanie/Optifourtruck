@@ -19,7 +19,80 @@ import misesEnBouche from "@/assets/mises-en-bouche.png";
 import numberCake49 from "@/assets/number-cake-49.png";
 import logoHero from "@/assets/logo-hero.png";
 
-const containerVariants = {
+const TestimonialRotator = () => {
+  const [current, setCurrent] = useState(0);
+  const featured = testimonials.slice(0, 5);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % featured.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [featured.length]);
+
+  const t = featured[current];
+
+  return (
+    <section className="section-padding bg-primary/5 relative overflow-hidden">
+      <div className="absolute inset-0 bg-dots opacity-30" />
+      <div className="container-narrow text-center relative z-10">
+        <RevealSection>
+          <TextReveal>
+            <span className="text-caption">Témoignages</span>
+          </TextReveal>
+          <div className="mt-8 min-h-[200px] flex flex-col items-center justify-center">
+            <div className="flex justify-center gap-1 mb-6">
+              {[...Array(t.rating)].map((_, i) => (
+                <Star key={i} className="w-6 h-6 fill-primary text-primary" />
+              ))}
+            </div>
+            <AnimatePresence mode="wait">
+              <motion.blockquote
+                key={current}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <p className="font-display text-2xl md:text-3xl lg:text-4xl italic leading-relaxed text-foreground">
+                  "{t.text}"
+                </p>
+                <footer className="mt-8">
+                  <p className="font-medium text-foreground">{t.name}</p>
+                </footer>
+              </motion.blockquote>
+            </AnimatePresence>
+            <div className="flex justify-center gap-2 mt-6">
+              {featured.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrent(i)}
+                  className={`w-2 h-2 rounded-full transition-all ${i === current ? "bg-primary w-6" : "bg-primary/30"}`}
+                />
+              ))}
+            </div>
+          </div>
+        </RevealSection>
+
+        <RevealSection delay={0.3} className="mt-12">
+          <MagneticButton>
+            <Link
+              to="/avis"
+              className="inline-flex items-center gap-2 text-primary font-medium link-underline group"
+            >
+              Lire tous les avis
+              <motion.span className="group-hover:translate-x-1 transition-transform">
+                <ArrowRight size={18} />
+              </motion.span>
+            </Link>
+          </MagneticButton>
+        </RevealSection>
+      </div>
+    </section>
+  );
+};
+
+
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
