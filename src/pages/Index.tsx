@@ -1,6 +1,8 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { ArrowRight, Star, Award, Heart } from "lucide-react";
+import { testimonials } from "@/data/testimonials";
 import { RevealSection } from "@/components/RevealSection";
 import { Layout } from "@/components/Layout";
 import { TextReveal, SplitText } from "@/components/TextReveal";
