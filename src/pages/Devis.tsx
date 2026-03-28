@@ -1,4 +1,5 @@
 import { Layout } from "@/components/Layout";
+import { SEO } from "@/components/SEO";
 import { RevealSection } from "@/components/RevealSection";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
@@ -141,6 +142,11 @@ const Devis = () => {
 
   return (
     <Layout>
+      <SEO 
+        title="Demande de Devis | Pâtissier-Traiteur Saverdun, Ariège"
+        description="Demandez un devis gratuit pour vos gâteaux, wedding cakes et buffets sucrés. Livraison en Ariège et Haute-Garonne sous 48h."
+        canonical="/devis"
+      />
       {/* Hero */}
       <section className="pt-32 pb-12 bg-background">
         <div className="container-wide text-center">

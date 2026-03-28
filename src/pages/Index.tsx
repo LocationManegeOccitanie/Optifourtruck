@@ -5,6 +5,7 @@ import { ArrowRight, Star, Award, Heart } from "lucide-react";
 import { testimonials } from "@/data/testimonials";
 import { RevealSection } from "@/components/RevealSection";
 import { Layout } from "@/components/Layout";
+import { SEO } from "@/components/SEO";
 import { TextReveal, SplitText } from "@/components/TextReveal";
 import { MagneticButton } from "@/components/MagneticButton";
 import { ImageReveal } from "@/components/ImageReveal";
@@ -222,6 +223,11 @@ const Index = () => {
 
   return (
     <Layout>
+      <SEO 
+        title="Pâtissier-Traiteur Artisanal à Saverdun, Ariège & Haute-Garonne"
+        description="O P'tit Four Truck, pâtissier-traiteur artisanal à Saverdun. Gâteaux sur-mesure, wedding cakes, buffets sucrés. Livraison en Ariège et Haute-Garonne : Pamiers, Foix, Toulouse, Muret."
+        canonical="/"
+      />
       {/* Hero Section - Full cinematic experience */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <HeroParallax src={tarteFruits} alt="Pâtisseries artisanales" />
