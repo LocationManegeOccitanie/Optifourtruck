@@ -1,4 +1,5 @@
 import { Layout } from "@/components/Layout";
+import { SEO } from "@/components/SEO";
 import { RevealSection } from "@/components/RevealSection";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -56,6 +57,11 @@ const Galerie = () => {
 
   return (
     <Layout>
+      <SEO 
+        title="Galerie | Nos créations pâtissières artisanales"
+        description="Découvrez nos réalisations : wedding cakes, gâteaux thématiques, buffets sucrés, pièces montées. Pâtissier artisanal en Ariège et Haute-Garonne."
+        canonical="/galerie"
+      />
       {/* Hero */}
       <section className="pt-32 pb-16 bg-background">
         <div className="container-wide text-center">

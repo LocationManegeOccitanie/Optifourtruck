@@ -1,4 +1,5 @@
 import { Layout } from "@/components/Layout";
+import { SEO } from "@/components/SEO";
 import { RevealSection } from "@/components/RevealSection";
 import { TiltCard } from "@/components/premium/TiltCard";
 import { motion } from "framer-motion";
@@ -62,6 +63,11 @@ const prestations = [
 const Prestations = () => {
   return (
     <Layout>
+      <SEO 
+        title="Prestations | Gâteaux & Buffets sur-mesure en Ariège et Haute-Garonne"
+        description="Wedding cakes, gâteaux d'anniversaire, buffets sucrés pour particuliers et professionnels. Livraison à Saverdun, Pamiers, Foix, Toulouse et toute la Haute-Garonne."
+        canonical="/prestations"
+      />
       {/* Hero */}
       <section className="pt-32 pb-20 bg-background">
         <div className="container-wide text-center">

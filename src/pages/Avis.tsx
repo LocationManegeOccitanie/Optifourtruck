@@ -1,4 +1,5 @@
 import { Layout } from "@/components/Layout";
+import { SEO } from "@/components/SEO";
 import { RevealSection } from "@/components/RevealSection";
 import { TestimonialMarquee } from "@/components/premium/TestimonialMarquee";
 import { AnimatedStars } from "@/components/premium/AnimatedStars";
@@ -17,6 +18,11 @@ const stats = [
 const Avis = () => {
   return (
     <Layout>
+      <SEO 
+        title="Avis Clients | Témoignages sur nos pâtisseries"
+        description="Découvrez les avis de nos clients satisfaits. Pâtissier-traiteur 5 étoiles à Saverdun, livraison en Ariège et Haute-Garonne."
+        canonical="/avis"
+      />
       {/* Hero */}
       <section className="pt-32 pb-16 bg-background">
         <div className="container-wide text-center">

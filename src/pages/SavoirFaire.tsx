@@ -1,4 +1,5 @@
 import { Layout } from "@/components/Layout";
+import { SEO } from "@/components/SEO";
 import { RevealSection } from "@/components/RevealSection";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -10,6 +11,11 @@ import macarons from "@/assets/macarons.jpg";
 const SavoirFaire = () => {
   return (
     <Layout>
+      <SEO 
+        title="Notre Savoir-Faire | Pâtisserie Artisanale en Ariège"
+        description="Découvrez le savoir-faire d'Alicia, artisan pâtissière à Saverdun. Créations gourmandes faites maison avec des produits locaux d'Ariège et d'Occitanie."
+        canonical="/savoir-faire"
+      />
       {/* Hero */}
       <section className="pt-32 pb-20 bg-background">
         <div className="container-wide">
