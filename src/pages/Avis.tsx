@@ -3,7 +3,8 @@ import { RevealSection } from "@/components/RevealSection";
 import { TestimonialMarquee } from "@/components/premium/TestimonialMarquee";
 import { AnimatedStars } from "@/components/premium/AnimatedStars";
 import { motion } from "framer-motion";
-import { Users, Heart, Award, Star } from "lucide-react";
+import { Users, Heart, Award, Star, Quote, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { CountUp } from "@/components/CountUp";
 import { testimonials } from "@/data/testimonials";
 
