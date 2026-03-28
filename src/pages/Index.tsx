@@ -329,7 +329,7 @@ const Index = () => {
                   className="absolute -bottom-6 -right-6 bg-accent rounded-2xl p-6 shadow-[var(--shadow-elevated)]"
                 >
                   <p className="font-display text-3xl text-foreground">
-                    <CountUp value={10} prefix="+" suffix="" />
+                    <CountUp value={5} prefix="+" suffix="" />
                     <span className="text-lg ml-1">ans</span>
                   </p>
                   <p className="text-sm text-muted-foreground">de passion</p>
