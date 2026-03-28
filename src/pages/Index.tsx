@@ -546,72 +546,7 @@ const Index = () => {
       </section>
 
       {/* Testimonial Preview */}
-      <section className="section-padding bg-primary/5 relative overflow-hidden">
-        <div className="absolute inset-0 bg-dots opacity-30" />
-        <div className="container-narrow text-center relative z-10">
-          <RevealSection>
-            <TextReveal>
-              <span className="text-caption">Témoignages</span>
-            </TextReveal>
-            <motion.blockquote 
-              className="mt-8"
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <motion.div
-                className="flex justify-center gap-1 mb-6"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
-              >
-                {[...Array(5)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.6 + i * 0.1, type: "spring", stiffness: 300 }}
-                  >
-                    <Star className="w-6 h-6 fill-primary text-primary" />
-                  </motion.div>
-                ))}
-              </motion.div>
-              <p className="font-display text-2xl md:text-3xl lg:text-4xl italic leading-relaxed text-foreground">
-                "Alicia a sublimé notre mariage avec ses créations. Chaque pâtisserie était une œuvre d'art, 
-                et nos invités en parlent encore !"
-              </p>
-              <footer className="mt-8">
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.8 }}
-                >
-                  <p className="font-medium text-foreground">Marie & Thomas</p>
-                  <p className="text-muted-foreground text-sm">Mariage - Juin 2024</p>
-                </motion.div>
-              </footer>
-            </motion.blockquote>
-          </RevealSection>
-
-          <RevealSection delay={0.3} className="mt-12">
-            <MagneticButton>
-              <Link
-                to="/avis"
-                className="inline-flex items-center gap-2 text-primary font-medium link-underline group"
-              >
-                Lire tous les avis
-                <motion.span className="group-hover:translate-x-1 transition-transform">
-                  <ArrowRight size={18} />
-                </motion.span>
-              </Link>
-            </MagneticButton>
-          </RevealSection>
-        </div>
-      </section>
+      <TestimonialRotator />
 
       {/* CTA Section */}
       <section className="section-padding bg-foreground text-background relative overflow-hidden">
