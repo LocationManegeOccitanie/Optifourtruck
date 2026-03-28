@@ -3,11 +3,10 @@ import { RevealSection } from "@/components/RevealSection";
 import { TiltCard } from "@/components/premium/TiltCard";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Heart, Building2, Sparkles, Gift } from "lucide-react";
+import { ArrowRight, Heart, Building2, Sparkles } from "lucide-react";
 import weddingCake from "@/assets/wedding-cake.jpg";
 import cateringSpread from "@/assets/catering-spread.jpg";
 import petitFours from "@/assets/petit-fours.jpg";
-import macarons from "@/assets/macarons.jpg";
 
 const prestations = [
   {
@@ -16,13 +15,13 @@ const prestations = [
     title: "Événements privés",
     subtitle: "Mariages, anniversaires, baptêmes...",
     description:
-      "Votre événement mérite des créations à la hauteur de vos émotions. Du wedding cake de vos rêves aux petits fours les plus raffinés, nous imaginons ensemble une offre sur-mesure.",
+      "Votre événement mérite des créations à la hauteur de vos émotions. Du wedding cake de vos rêves aux petits fours les plus raffinés, nous imaginons ensemble une offre sur-mesure, livrée directement sur le lieu de votre événement.",
     services: [
       "Wedding cakes & pièces montées",
       "Buffets de desserts",
       "Mignardises & petits fours",
       "Gâteaux d'anniversaire personnalisés",
-      "Macarons aux saveurs personnalisées",
+      "Livraison sur le lieu de l'événement",
     ],
     image: weddingCake,
   },
@@ -30,15 +29,15 @@ const prestations = [
     id: "professionnels",
     icon: Building2,
     title: "Événements professionnels",
-    subtitle: "Séminaires, cocktails, inaugurations...",
+    subtitle: "Séminaires, pauses gourmandes, célébrations...",
     description:
-      "Impressionnez vos collaborateurs et partenaires avec des prestations traiteur haut de gamme. Des pauses gourmandes aux cocktails dînatoires, nous sublimions vos événements d'entreprise.",
+      "Impressionnez vos collaborateurs et partenaires avec des créations pâtissières haut de gamme. Nous préparons et livrons directement sur votre lieu d'événement pour sublimer vos moments d'entreprise.",
     services: [
-      "Cocktails dînatoires",
-      "Pauses gourmandes & brunchs",
-      "Buffets salés & sucrés",
-      "Réceptions inaugurales",
+      "Pauses gourmandes & brunchs sucrés",
+      "Buffets de desserts",
+      "Mignardises pour cocktails",
       "Cadeaux d'entreprise personnalisés",
+      "Livraison clé en main",
     ],
     image: cateringSpread,
   },
@@ -48,7 +47,7 @@ const prestations = [
     title: "Créations sur-mesure",
     subtitle: "Vos envies prennent forme",
     description:
-      "Vous avez une idée précise ou un thème particulier ? Partagez-nous votre vision et nous la transformons en réalité gourmande. Chaque création est unique, à votre image.",
+      "Vous avez une idée précise ou un thème particulier ? Partagez-nous votre vision et nous la transformons en réalité gourmande. Chaque création est unique, à votre image, et livrée avec soin.",
     services: [
       "Gâteaux thématiques",
       "Créations selon vos inspirations",
@@ -57,22 +56,6 @@ const prestations = [
       "Collaborations créatives",
     ],
     image: petitFours,
-  },
-  {
-    id: "cadeaux",
-    icon: Gift,
-    title: "Coffrets gourmands",
-    subtitle: "Pour offrir ou se faire plaisir",
-    description:
-      "Nos coffrets sont composés avec soin pour offrir un moment de pure gourmandise. Parfaits pour les fêtes, les remerciements ou simplement pour faire plaisir.",
-    services: [
-      "Coffrets de macarons",
-      "Assortiments de mignardises",
-      "Coffrets cadeaux personnalisés",
-      "Paniers gourmands pour entreprises",
-      "Éditions saisonnières",
-    ],
-    image: macarons,
   },
 ];
 
