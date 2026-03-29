@@ -1,5 +1,5 @@
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ReactNode, useRef } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+import { ReactNode, useRef, forwardRef } from "react";
 
 interface MagneticButtonProps {
   children: ReactNode;
@@ -7,12 +7,12 @@ interface MagneticButtonProps {
   strength?: number;
 }
 
-export const MagneticButton = ({ 
+export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(({ 
   children, 
   className = "",
   strength = 0.3
-}: MagneticButtonProps) => {
-  const ref = useRef<HTMLDivElement>(null);
+}, forwardedRef) => {
+  const innerRef = useRef<HTMLDivElement>(null);
   
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -22,9 +22,9 @@ export const MagneticButton = ({
   const springY = useSpring(y, springConfig);
   
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!ref.current) return;
+    if (!innerRef.current) return;
     
-    const rect = ref.current.getBoundingClientRect();
+    const rect = innerRef.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
     
@@ -42,7 +42,11 @@ export const MagneticButton = ({
   
   return (
     <motion.div
-      ref={ref}
+      ref={(node) => {
+        (innerRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+        if (typeof forwardedRef === 'function') forwardedRef(node);
+        else if (forwardedRef) (forwardedRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+      }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ x: springX, y: springY }}
@@ -51,4 +55,6 @@ export const MagneticButton = ({
       {children}
     </motion.div>
   );
-};
+});
+
+MagneticButton.displayName = "MagneticButton";
