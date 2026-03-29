@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { ArrowRight, Star, Award, Heart } from "lucide-react";
@@ -20,7 +20,7 @@ import misesEnBouche from "@/assets/mises-en-bouche.png";
 import numberCake49 from "@/assets/number-cake-49.png";
 import logoHero from "@/assets/logo-hero.png";
 
-const TestimonialRotator = () => {
+const TestimonialRotator = React.forwardRef<HTMLElement>((_, ref) => {
   const [current, setCurrent] = useState(0);
   const featured = testimonials.slice(0, 5);
 
@@ -34,7 +34,7 @@ const TestimonialRotator = () => {
   const t = featured[current];
 
   return (
-    <section className="section-padding bg-primary/5 relative overflow-hidden">
+    <section ref={ref} className="section-padding bg-primary/5 relative overflow-hidden">
       <div className="absolute inset-0 bg-dots opacity-30" />
       <div className="container-narrow text-center relative z-10">
         <RevealSection>
@@ -91,7 +91,9 @@ const TestimonialRotator = () => {
       </div>
     </section>
   );
-};
+});
+
+TestimonialRotator.displayName = "TestimonialRotator";
 
 
 const containerVariants = {
