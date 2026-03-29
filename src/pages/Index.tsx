@@ -305,7 +305,7 @@ const Index = () => {
             <motion.div variants={prefersReducedMotion ? itemVariants : heroItemVariants}>
               <h1 className="heading-hero max-w-4xl mx-auto leading-[1.1]">
                 <SplitText
-                  text="L'art de sublimer vos"
+                  text="L'art de sublimer vos événements"
                   delay={prefersReducedMotion ? 0 : 0.9}
                   staggerDelay={0.03}
                 />
