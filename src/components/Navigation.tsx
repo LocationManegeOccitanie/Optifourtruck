@@ -123,7 +123,7 @@ export const Navigation = () => {
 
       {/* Mobile Menu - rendered via portal to escape PageTransition transform scope */}
       {isOpen && createPortal(
-        <div className="fixed inset-0 z-[45] lg:hidden bg-background flex flex-col items-center justify-center gap-8">
+        <div className="fixed inset-0 z-[55] lg:hidden bg-background flex flex-col items-center justify-center gap-8">
           {/* Mobile Logo */}
           <img 
             src={logoAlicia} 

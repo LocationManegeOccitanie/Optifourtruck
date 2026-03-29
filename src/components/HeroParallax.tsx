@@ -18,7 +18,7 @@ export const HeroParallax = ({ src, alt }: HeroParallaxProps) => {
   const opacity = useTransform(scrollYProgress, [0, 0.7, 1], [1, 0.4, 0]);
 
   return (
-    <div ref={ref} className="absolute inset-0 overflow-hidden relative">
+    <div ref={ref} className="absolute inset-0 overflow-hidden">
       {/* Image with parallax and cinematic zoom entrance */}
       <motion.div
         className="absolute inset-0"
