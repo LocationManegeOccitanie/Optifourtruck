@@ -3,6 +3,8 @@ import { SEO } from "@/components/SEO";
 import { RevealSection } from "@/components/RevealSection";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 import { 
   Send, 
   Phone, 
@@ -85,9 +87,52 @@ const Devis = () => {
 
   const totalSteps = 5;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
+    try {
+      // Save to database
+      const { error: dbError } = await supabase.from("quote_requests").insert({
+        event_category: formData.eventCategory,
+        event_date: formData.eventDate || null,
+        event_city: formData.eventCity || null,
+        event_department: formData.eventDepartment || null,
+        guest_count: formData.guestCount || null,
+        event_time: formData.eventTime || null,
+        services: formData.services,
+        project_description: formData.projectDescription || null,
+        budget: formData.budget || null,
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        email: formData.email,
+        phone: formData.phone || null,
+        contact_preference: formData.contactPreference || null,
+      });
+
+      if (dbError) {
+        console.error("DB error:", dbError);
+        toast.error("Une erreur est survenue. Veuillez réessayer.");
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Send email notification (non-blocking)
+      supabase.functions.invoke("send-quote-notification", {
+        body: formData,
+      }).catch((err) => console.error("Email notification error:", err));
+
+      setIsSubmitted(true);
+      toast.success("Votre demande a bien été envoyée !");
+    } catch (error) {
+      console.error("Submit error:", error);
+      toast.error("Une erreur est survenue. Veuillez réessayer.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -716,18 +761,31 @@ const Devis = () => {
                     ) : (
                       <motion.button
                         type="submit"
-                        disabled={!canProceed()}
-                        whileHover={{ scale: canProceed() ? 1.02 : 1 }}
-                        whileTap={{ scale: canProceed() ? 0.98 : 1 }}
+                        disabled={!canProceed() || isSubmitting}
+                        whileHover={{ scale: canProceed() && !isSubmitting ? 1.02 : 1 }}
+                        whileTap={{ scale: canProceed() && !isSubmitting ? 0.98 : 1 }}
                         className={`flex items-center gap-2 px-8 py-3 rounded-xl font-medium transition-all ${
-                          canProceed()
+                          canProceed() && !isSubmitting
                             ? "bg-gradient-to-r from-primary to-accent text-white shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30"
                             : "bg-muted text-muted-foreground cursor-not-allowed"
                         }`}
                       >
-                        <Sparkles size={18} />
-                        Recevoir mon devis personnalisé
-                        <Send size={18} />
+                        {isSubmitting ? (
+                          <>
+                            <motion.div
+                              className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+                              animate={{ rotate: 360 }}
+                              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                            />
+                            Envoi en cours...
+                          </>
+                        ) : (
+                          <>
+                            <Sparkles size={18} />
+                            Recevoir mon devis personnalisé
+                            <Send size={18} />
+                          </>
+                        )}
                       </motion.button>
                     )}
                   </div>
