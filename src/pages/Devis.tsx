@@ -761,18 +761,31 @@ const Devis = () => {
                     ) : (
                       <motion.button
                         type="submit"
-                        disabled={!canProceed()}
-                        whileHover={{ scale: canProceed() ? 1.02 : 1 }}
-                        whileTap={{ scale: canProceed() ? 0.98 : 1 }}
+                        disabled={!canProceed() || isSubmitting}
+                        whileHover={{ scale: canProceed() && !isSubmitting ? 1.02 : 1 }}
+                        whileTap={{ scale: canProceed() && !isSubmitting ? 0.98 : 1 }}
                         className={`flex items-center gap-2 px-8 py-3 rounded-xl font-medium transition-all ${
-                          canProceed()
+                          canProceed() && !isSubmitting
                             ? "bg-gradient-to-r from-primary to-accent text-white shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30"
                             : "bg-muted text-muted-foreground cursor-not-allowed"
                         }`}
                       >
-                        <Sparkles size={18} />
-                        Recevoir mon devis personnalisé
-                        <Send size={18} />
+                        {isSubmitting ? (
+                          <>
+                            <motion.div
+                              className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+                              animate={{ rotate: 360 }}
+                              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                            />
+                            Envoi en cours...
+                          </>
+                        ) : (
+                          <>
+                            <Sparkles size={18} />
+                            Recevoir mon devis personnalisé
+                            <Send size={18} />
+                          </>
+                        )}
                       </motion.button>
                     )}
                   </div>
