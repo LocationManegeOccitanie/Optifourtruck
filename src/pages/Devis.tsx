@@ -268,9 +268,9 @@ const Devis = () => {
                       <Phone size={14} className="text-primary" />
                       <span>06 56 82 97 11</span>
                     </a>
-                    <a href="mailto:optifourtruck.contact@gmail.com" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
+                    <a href="mailto:contact@optifourtruck.fr" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
                       <Mail size={14} className="text-primary" />
-                      <span className="text-xs">optifourtruck.contact@gmail.com</span>
+                      <span className="text-xs">contact@optifourtruck.fr</span>
                     </a>
                   </div>
                 </div>

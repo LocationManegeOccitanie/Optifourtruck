@@ -149,8 +149,8 @@ export const Footer = () => {
                   transition={{ duration: 0.2 }}
                 >
                   <Mail size={18} className="text-primary mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                  <a href="mailto:optifourtruck.contact@gmail.com" className="text-background/70 text-sm hover:text-primary transition-colors break-all">
-                    optifourtruck.contact@gmail.com
+                  <a href="mailto:contact@optifourtruck.fr" className="text-background/70 text-sm hover:text-primary transition-colors break-all">
+                    contact@optifourtruck.fr
                   </a>
                 </motion.li>
                 <motion.li 
