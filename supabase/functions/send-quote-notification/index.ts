@@ -60,7 +60,7 @@ serve(async (req) => {
     const data: QuoteRequest = await req.json();
 
     const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
-    const notificationEmail = "optifourtruck.contact@gmail.com";
+    const notificationEmail = "contact@optifourtruck.fr";
 
     const servicesText = data.services
       .map((s) => SERVICE_LABELS[s] || s)
