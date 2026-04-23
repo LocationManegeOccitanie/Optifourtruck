@@ -33,28 +33,22 @@ export const RevealSection = ({
 
   return (
     <motion.div
-      initial={{ 
-        opacity: 0, 
+      initial={{
+        opacity: 0,
         ...directions[direction],
-        // GPU optimization
-        willChange: "transform, opacity"
       }}
-      whileInView={{ 
-        opacity: 1, 
-        y: 0, 
-        x: 0 
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        x: 0,
       }}
       viewport={VIEWPORT.default}
-      transition={{ 
-        duration: optimized.duration || DURATION.slow, 
+      transition={{
+        duration: optimized.duration || DURATION.slow,
         delay: delay * optimized.delay,
         ease: EASE.expo
       }}
       className={className}
-      style={{ 
-        // Force GPU layer
-        transform: "translateZ(0)"
-      }}
     >
       {children}
     </motion.div>

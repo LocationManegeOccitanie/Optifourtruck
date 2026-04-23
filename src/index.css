@@ -248,10 +248,10 @@
   }
   
   .card-glass {
-    @apply bg-white/70 backdrop-blur-xl rounded-2xl p-8
-           border border-white/50 shadow-[var(--shadow-soft)]
+    @apply bg-card/80 backdrop-blur-xl rounded-2xl p-8
+           border border-border/50 shadow-[var(--shadow-soft)]
            transition-all duration-500 ease-out
-           hover:shadow-[var(--shadow-medium)] hover:bg-white/80;
+           hover:shadow-[var(--shadow-medium)] hover:bg-card/90;
   }
   
   /* Text Styles */

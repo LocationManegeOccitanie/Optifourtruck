@@ -162,18 +162,26 @@ const Devis = () => {
     }
   };
 
+  const isValidEmail = (email: string) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
   const canProceed = () => {
     switch (currentStep) {
       case 1:
         return formData.eventCategory !== "";
       case 2:
-        return formData.eventDate !== "" && formData.eventCity !== "";
+        return formData.eventDate !== "" && formData.eventCity !== "" && formData.guestCount !== "";
       case 3:
         return formData.services.length > 0;
       case 4:
-        return true; // Budget is optional
+        return true;
       case 5:
-        return formData.firstName !== "" && formData.lastName !== "" && formData.email !== "";
+        return (
+          formData.firstName !== "" &&
+          formData.lastName !== "" &&
+          formData.email !== "" &&
+          isValidEmail(formData.email)
+        );
       default:
         return true;
     }
@@ -660,8 +668,17 @@ const Devis = () => {
                               value={formData.email}
                               onChange={handleChange}
                               placeholder="votre@email.com"
-                              className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none"
+                              className={`w-full px-4 py-3 rounded-xl border bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none ${
+                                formData.email && !isValidEmail(formData.email)
+                                  ? "border-destructive focus:ring-destructive/20 focus:border-destructive"
+                                  : "border-border"
+                              }`}
                             />
+                            {formData.email && !isValidEmail(formData.email) && (
+                              <p className="text-xs text-destructive mt-1">
+                                Veuillez entrer une adresse email valide.
+                              </p>
+                            )}
                           </div>
 
                           {/* Phone */}

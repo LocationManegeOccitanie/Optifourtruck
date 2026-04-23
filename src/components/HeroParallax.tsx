@@ -32,6 +32,9 @@ export const HeroParallax = ({ src, alt }: HeroParallaxProps) => {
           alt={alt}
           className="w-full h-full object-cover"
           style={{ opacity }}
+          loading="eager"
+          fetchPriority="high"
+          decoding="sync"
         />
       </motion.div>
 
