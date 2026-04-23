@@ -114,6 +114,8 @@ const Prestations = () => {
                       src={prestation.image}
                       alt={prestation.title}
                       className="w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                 </TiltCard>

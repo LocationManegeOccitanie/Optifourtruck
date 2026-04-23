@@ -6,6 +6,29 @@ import { Menu, X } from "lucide-react";
 import logoAlicia from "@/assets/logo-alicia.svg";
 import { ThemeToggle } from "./ThemeToggle";
 
+const mobileMenuVariants = {
+  hidden: { opacity: 0, y: -16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] as const },
+  },
+  exit: {
+    opacity: 0,
+    y: -16,
+    transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] as const },
+  },
+};
+
+const mobileLinkVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.07 + 0.1, duration: 0.4, ease: [0.22, 1, 0.36, 1] as const },
+  }),
+};
+
 const navLinks = [
   { name: "Accueil", path: "/" },
   { name: "Savoir-Faire", path: "/savoir-faire" },
@@ -114,46 +137,100 @@ export const Navigation = () => {
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="lg:hidden relative z-10 p-2 text-foreground"
-            aria-label="Menu"
+            aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            <AnimatePresence mode="wait" initial={false}>
+              {isOpen ? (
+                <motion.span
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  style={{ display: "block" }}
+                >
+                  <X size={24} />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="menu"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  style={{ display: "block" }}
+                >
+                  <Menu size={24} />
+                </motion.span>
+              )}
+            </AnimatePresence>
           </button>
         </nav>
       </motion.header>
 
       {/* Mobile Menu - rendered via portal to escape PageTransition transform scope */}
-      {isOpen && createPortal(
-        <div className="fixed inset-0 z-[55] lg:hidden bg-background flex flex-col items-center justify-center gap-8">
-          {/* Mobile Logo */}
-          <img 
-            src={logoAlicia} 
-            alt="O P'tit Four Truck" 
-            className="h-24 mb-4"
-          />
-          
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={`font-display text-3xl transition-colors ${
-                location.pathname === link.path 
-                  ? "text-primary" 
-                  : "text-foreground hover:text-primary"
-              }`}
+      {createPortal(
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              id="mobile-menu"
+              role="dialog"
+              aria-label="Menu de navigation"
+              variants={prefersReducedMotion ? undefined : mobileMenuVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="fixed inset-0 z-[55] lg:hidden bg-background flex flex-col items-center justify-center gap-8"
             >
-              {link.name}
-            </Link>
-          ))}
-          <div className="flex flex-col items-center gap-6 mt-4">
-            <Link to="/devis" className="btn-primary">
-              Demander un devis
-            </Link>
-            <div className="flex items-center gap-2 text-muted-foreground text-sm">
-              <span>Thème</span>
-              <ThemeToggle />
-            </div>
-          </div>
-        </div>,
+              {/* Mobile Logo */}
+              <img
+                src={logoAlicia}
+                alt="O P'tit Four Truck"
+                className="h-24 mb-4"
+                loading="lazy"
+              />
+
+              {navLinks.map((link, i) => (
+                <motion.div
+                  key={link.path}
+                  custom={i}
+                  variants={prefersReducedMotion ? undefined : mobileLinkVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  <Link
+                    to={link.path}
+                    className={`font-display text-3xl transition-colors ${
+                      location.pathname === link.path
+                        ? "text-primary"
+                        : "text-foreground hover:text-primary"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                </motion.div>
+              ))}
+
+              <motion.div
+                custom={navLinks.length}
+                variants={prefersReducedMotion ? undefined : mobileLinkVariants}
+                initial="hidden"
+                animate="visible"
+                className="flex flex-col items-center gap-6 mt-4"
+              >
+                <Link to="/devis" className="btn-primary">
+                  Demander un devis
+                </Link>
+                <div className="flex items-center gap-2 text-muted-foreground text-sm">
+                  <span>Thème</span>
+                  <ThemeToggle />
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>,
         document.body
       )}
     </>

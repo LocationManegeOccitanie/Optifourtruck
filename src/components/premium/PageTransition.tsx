@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
-import { ReactNode, useRef, useEffect } from "react";
+import { ReactNode } from "react";
 import { useOptimizedAnimation, getOptimizedValues } from "@/hooks/useOptimizedAnimation";
 import { EASE, DURATION } from "@/lib/animations";
 
@@ -11,7 +11,12 @@ interface PageTransitionProps {
 // Route order for directional transitions
 const routeOrder = ['/', '/savoir-faire', '/prestations', '/galerie', '/avis', '/devis'];
 
-const getDirection = (currentPath: string, prevPath: string | null): number => {
+// Module-level variable so direction persists across component remounts caused by AnimatePresence
+let _prevPath: string | null = null;
+
+const getDirection = (currentPath: string): number => {
+  const prevPath = _prevPath;
+  _prevPath = currentPath;
   if (!prevPath) return 1;
   const currentIndex = routeOrder.indexOf(currentPath);
   const prevIndex = routeOrder.indexOf(prevPath);
@@ -109,13 +114,8 @@ const contentStaggerVariants = {
 export const PageTransition = ({ children }: PageTransitionProps) => {
   const location = useLocation();
   const { intensity, shouldAnimate } = useOptimizedAnimation();
-  const prevPathRef = useRef<string | null>(null);
-  
-  const direction = getDirection(location.pathname, prevPathRef.current);
-  
-  useEffect(() => {
-    prevPathRef.current = location.pathname;
-  }, [location.pathname]);
+
+  const direction = getDirection(location.pathname);
 
   const pageVariants = createPageVariants(direction, intensity);
   const curtainVariants = createCurtainVariants(intensity);

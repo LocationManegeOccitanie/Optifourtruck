@@ -51,6 +51,8 @@ const SavoirFaire = () => {
                     src={chefPortrait}
                     alt="Alicia - Fondatrice d'O P'tit Four Truck"
                     className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </motion.div>
                 <div className="absolute -bottom-6 -left-6 bg-primary text-primary-foreground rounded-2xl p-6 shadow-[var(--shadow-elevated)]">
@@ -205,10 +207,10 @@ const SavoirFaire = () => {
             <RevealSection delay={0.3} direction="right">
               <div className="grid grid-cols-2 gap-4">
                 <div className="aspect-[3/4] rounded-2xl overflow-hidden">
-                  <img src={petitFours} alt="Petit fours artisanaux" className="w-full h-full object-cover" />
+                  <img src={petitFours} alt="Petit fours artisanaux" className="w-full h-full object-cover" loading="lazy" decoding="async" />
                 </div>
                 <div className="aspect-[3/4] rounded-2xl overflow-hidden mt-12">
-                  <img src={macarons} alt="Macarons faits maison" className="w-full h-full object-cover" />
+                  <img src={macarons} alt="Macarons faits maison" className="w-full h-full object-cover" loading="lazy" decoding="async" />
                 </div>
               </div>
             </RevealSection>

@@ -293,6 +293,8 @@ const Index = () => {
                   imageRendering: 'auto',
                   WebkitFontSmoothing: 'antialiased'
                 }}
+                loading="eager"
+                fetchPriority="high"
                 decoding="async"
               />
             </motion.div>
@@ -526,6 +528,8 @@ const Index = () => {
                       className="w-full h-full object-cover"
                       whileHover={{ scale: 1.1 }}
                       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                      loading="lazy"
+                      decoding="async"
                     />
                     <motion.div 
                       className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
@@ -602,6 +606,8 @@ const Index = () => {
                     className="w-full h-full object-cover"
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                    loading="lazy"
+                    decoding="async"
                   />
                   <motion.div 
                     className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
