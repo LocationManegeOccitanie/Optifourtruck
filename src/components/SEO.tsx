@@ -8,7 +8,7 @@ interface SEOProps {
 }
 
 const SITE_NAME = "O P'tit Four Truck";
-const BASE_URL = "https://optitfourtruck.fr";
+const BASE_URL = "https://optifourtruck.fr";
 
 export const SEO = ({
   title,

@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://optitfourtruck.fr/sitemap.xml
+Sitemap: https://optifourtruck.fr/sitemap.xml
