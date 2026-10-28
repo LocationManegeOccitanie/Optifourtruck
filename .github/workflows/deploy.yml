@@ -29,15 +29,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Build client + rendu serveur + pré-rendu HTML de chaque page, 404.html, sitemap.xml et robots.txt
       - name: Build
         run: npm run build
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          VITE_SUPABASE_PROJECT_ID: ${{ secrets.VITE_SUPABASE_PROJECT_ID }}
           VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
-
-      - name: Copy index.html to 404.html for SPA routing
-        run: cp dist/index.html dist/404.html
 
       - uses: actions/upload-pages-artifact@v3
         with:
