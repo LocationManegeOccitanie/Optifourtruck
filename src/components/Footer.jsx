@@ -2,7 +2,6 @@ import { useRef } from 'react'
 import { Link } from 'react-router'
 import { motion, useScroll, useTransform } from 'motion/react'
 import { contact, nav, services, hours } from '../data/content'
-import { img, logo } from '../data/photos'
 import { Icon } from '../lib'
 
 export default function Footer() {
@@ -15,7 +14,7 @@ export default function Footer() {
     <footer className="footer" ref={ref}>
       <div className="footer__top">
         <div className="footer__brand">
-          <img src={img(logo, 200)} alt="" width="84" height="84" loading="lazy" />
+          <img src="/icon-192.png" alt="" width="84" height="84" loading="lazy" />
           <p>Pâtissière & traiteur artisanal à Saverdun.<br />Fait maison, avec des produits frais et locaux.</p>
         </div>
         <nav aria-label="Pages du site">

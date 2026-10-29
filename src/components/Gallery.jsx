@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, useCallback } from 'react'
+import { useEffect, useMemo, useState, useCallback, useRef } from 'react'
 import { motion, AnimatePresence, LayoutGroup } from 'motion/react'
 import { photos, img } from '../data/photos'
 import { filters } from '../data/content'
@@ -12,6 +12,8 @@ export default function Gallery({ cats, limit, eyebrow = 'Galerie gourmande', ti
   const [filter, setFilter] = useState('all')
   const [shown, setShown] = useState(limit ?? STEP)
   const [open, setOpen] = useState(null)
+  const box = useRef(null)
+  const opener = useRef(null)
 
   const list = useMemo(
     () => photos.filter((p) => p.cat !== 'logo' && (!cats || cats.includes(p.cat)) && (filter === 'all' || p.cat === filter)),
@@ -28,14 +30,21 @@ export default function Gallery({ cats, limit, eyebrow = 'Galerie gourmande', ti
 
   useEffect(() => {
     if (open === null) return
+    setTimeout(() => box.current?.querySelector('.lightbox__close')?.focus(), 50)
     const onKey = (e) => {
+      if (e.key === 'Tab' && box.current) {
+        const f = [...box.current.querySelectorAll('button')]
+        const first = f[0], last = f[f.length - 1]
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus() }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus() }
+      }
       if (e.key === 'Escape') setOpen(null)
       if (e.key === 'ArrowRight') move(1)
       if (e.key === 'ArrowLeft') move(-1)
     }
     window.__lenis?.stop()
     window.addEventListener('keydown', onKey)
-    return () => { window.removeEventListener('keydown', onKey); window.__lenis?.start() }
+    return () => { window.removeEventListener('keydown', onKey); window.__lenis?.start(); opener.current?.focus() }
   }, [open, move])
 
   const current = photos.find((p) => p.i === open)
@@ -76,7 +85,7 @@ export default function Gallery({ cats, limit, eyebrow = 'Galerie gourmande', ti
               exit={{ opacity: 0, scale: 0.85 }}
               transition={{ duration: 0.55, delay: (k % STEP) * 0.03 }}
             >
-              <button className="tile__btn" onClick={() => setOpen(p.i)} data-cursor="Voir" aria-label={`Agrandir : ${labels[p.cat]}`}>
+              <button className="tile__btn" onClick={(e) => { opener.current = e.currentTarget; setOpen(p.i) }} data-cursor="Voir" aria-label={`Agrandir : ${labels[p.cat]}`}>
                 <motion.img layoutId={`photo-${p.i}`} src={img(p, 700)} alt={`Création O P'tit Four Truck — ${labels[p.cat]}`} loading="lazy" />
                 <span className="tile__tag">{labels[p.cat]}</span>
               </button>
@@ -103,6 +112,7 @@ export default function Gallery({ cats, limit, eyebrow = 'Galerie gourmande', ti
         {current && (
           <motion.div
             className="lightbox"
+            ref={box}
             role="dialog"
             aria-modal="true"
             aria-label="Photo agrandie"

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { reviews, contact } from '../data/content'
 import { SplitWords, Icon } from '../lib'
 
@@ -19,6 +20,7 @@ export function Card({ r }) {
 export default function Reviews({ heading = 'h2' }) {
   const a = reviews.slice(0, 5)
   const b = reviews.slice(5)
+  const [paused, setPaused] = useState(false)
   return (
     <section id="avis" className="reviews section">
       <div className="section__head section__head--center">
@@ -28,13 +30,20 @@ export default function Reviews({ heading = 'h2' }) {
           <strong>{contact.rating.value}</strong> / 5 · {contact.rating.count} avis sur Google <Icon name="arrow" size={16} />
         </a>
       </div>
-      {[a, b].map((row, k) => (
-        <div className={`marquee ${k ? 'marquee--rev' : ''}`} key={k}>
-          <div className="marquee__track">
-            {[...row, ...row].map((r, i) => <Card key={i} r={r} />)}
+      <div className={`marquees ${paused ? 'is-paused' : ''}`}>
+        {[a, b].map((row, k) => (
+          <div className={`marquee ${k ? 'marquee--rev' : ''}`} key={k}>
+            <ul className="marquee__track">
+              {row.map((r) => <li key={r.a}><Card r={r} /></li>)}
+              {/* copie pour la boucle visuelle, ignorée par les lecteurs d'écran */}
+              {row.map((r) => <li key={`${r.a}-copie`} aria-hidden="true"><Card r={r} /></li>)}
+            </ul>
           </div>
-        </div>
-      ))}
+        ))}
+        <button type="button" className="marquees__toggle" aria-pressed={paused} onClick={() => setPaused(!paused)}>
+          {paused ? 'Reprendre le défilement' : 'Mettre en pause le défilement'}
+        </button>
+      </div>
     </section>
   )
 }

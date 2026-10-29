@@ -38,7 +38,7 @@ export default function Ribbon() {
     <span key={i} className="ribbon__item">{t}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c1 5 5 9 10 10-5 1-9 5-10 10-1-5-5-9-10-10 5-1 9-5 10-10z" /></svg></span>
   ))
   return (
-    <section className="ribbons" aria-label="Nos spécialités">
+    <section className="ribbons" aria-hidden="true">
       <Row base={-2.2}>{items}</Row>
       <Row base={2.2} tilt>{items}</Row>
     </section>

@@ -14,6 +14,16 @@ export default function Services({ heading = 'h2' }) {
   const x = useTransform(p, [0, 1], ['0%', `-${(services.length) * 100 / (services.length + 1)}%`])
   const bar = useTransform(p, [0, 1], [0, 1])
 
+  // Clavier : amener le panneau qui reçoit le focus à l'écran (sinon le focus serait invisible)
+  const showPanel = (k) => {
+    const el = ref.current
+    if (!el || window.innerWidth <= 900) return
+    const top = el.getBoundingClientRect().top + window.scrollY
+    const y = top + (k / services.length) * (el.offsetHeight - window.innerHeight)
+    if (window.__lenis) window.__lenis.scrollTo(y, { immediate: true })
+    else window.scrollTo(0, y)
+  }
+
   return (
     <section id="prestations" className="services" ref={ref} style={{ '--n': services.length + 1 }}>
       <div className="services__sticky">
@@ -25,7 +35,7 @@ export default function Services({ heading = 'h2' }) {
             <span className="services__hint"><Icon name="arrow" size={18} /> Faites défiler</span>
           </div>
           {services.map((s, i) => (
-            <article key={s.title} className={`service service--${s.tone}`}>
+            <article key={s.title} className={`service service--${s.tone}`} onFocus={() => showPanel(i + 1)}>
               <div className="service__img">
                 <img src={img(byIndex(s.photo), 900)} alt={s.title} loading="lazy" />
                 <span className="service__num">0{i + 1}</span>

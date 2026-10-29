@@ -83,6 +83,16 @@ export const services = [
     photo: 57,
     tone: 'sage',
   },
+  {
+    slug: 'food-truck',
+    occasion: 'autre',
+    kicker: 'Mariages · EVJF · comités des fêtes',
+    title: 'Privatiser le food truck',
+    text: 'La remorque food truck d’Alicia s’installe sur votre événement : douceurs, brunch et bouchées servis sur place, devant vos invités.',
+    items: ['Service sur place', 'Particuliers & entreprises', 'Comités des fêtes & associations', 'Sucré et salé'],
+    photo: 24,
+    tone: 'blush',
+  },
 ]
 
 export const filters = [

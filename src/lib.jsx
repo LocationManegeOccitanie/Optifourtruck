@@ -16,7 +16,7 @@ export function SplitWords({ text, as: Tag = 'span', className, delay = 0, stagg
     ? { initial: 'hidden', whileInView: 'show', viewport: { once: true, amount: 0.5 } }
     : { initial: 'hidden', animate: animate ? 'show' : 'hidden' }
   return (
-    <Tag className={className} aria-label={text}>
+    <Tag className={className} aria-label={text.replace(/_/g, '')}>
       <motion.span
         style={{ display: 'inline' }}
         {...trigger}

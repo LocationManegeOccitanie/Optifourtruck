@@ -98,6 +98,35 @@ export const servicePages = {
   },
 }
 
+servicePages['food-truck'] = {
+  cats: ['douceurs', 'tartes', 'fete'],
+  h1: 'Privatiser un food truck pâtisserie en Ariège',
+  lead: 'La remorque food truck d’O P’tit Four Truck s’installe sur votre événement en Ariège et en Haute-Garonne : douceurs maison, brunch et bouchées servis sur place pour un mariage, un EVJF, un anniversaire, une fête de village ou un événement d’entreprise.',
+  sections: [
+    {
+      title: 'Une remorque gourmande sur votre événement',
+      text: 'Plutôt qu’une simple livraison, la remorque food truck s’installe sur place : vos invités se servent directement au comptoir, pour un moment convivial et original.',
+    },
+    {
+      title: 'Pour les particuliers et les organisateurs',
+      text: 'Mariages, baptêmes, anniversaires et EVJF, mais aussi comités des fêtes, associations et entreprises : la carte s’adapte à votre public et au nombre de convives.',
+    },
+    {
+      title: 'Fait maison, produits locaux',
+      text: 'Comme pour toutes les créations d’Alicia, tout est préparé à Saverdun avec des produits frais, locaux et de saison, sans additifs ni conservateurs.',
+    },
+  ],
+  faq: [
+    ['Où le food truck peut-il venir ?', 'En Ariège, en Haute-Garonne et aux alentours. Indiquez le lieu de votre événement dans votre demande.'],
+    ['Quels événements pouvez-vous accueillir ?', 'Mariages, EVJF, anniversaires, baptêmes, fêtes de village, comités des fêtes, associations et événements d’entreprise.'],
+    ['Comment réserver le food truck ?', 'Faites une demande de devis en ligne en précisant la date, le lieu et le nombre d’invités : Alicia vous répond sous 48 h.'],
+  ],
+  meta: {
+    title: 'Food truck pâtisserie à privatiser en Ariège | O P’tit Four Truck',
+    description: 'Food truck pâtisserie et brunch à privatiser pour mariages, EVJF, fêtes de village et entreprises en Ariège et Haute-Garonne. Fait maison, devis sous 48 h.',
+  },
+}
+
 export const generalFaq = [
   ['Où se trouve O P’tit Four Truck ?', 'Alicia est basée à Saverdun, en Ariège (09), et intervient en Ariège, en Haute-Garonne (31) et aux alentours.'],
   ['Comment obtenir un devis ?', 'Remplissez le formulaire de devis en ligne (2 minutes) ou appelez le 06 56 82 97 11. Vous recevez une proposition personnalisée sous 48 h, gratuitement et sans engagement.'],
@@ -138,8 +167,9 @@ export const pages = {
     image: 58,
   },
 }
+const servicePhoto = { mariage: 0, anniversaire: 25, 'evenements-professionnels': 57, 'food-truck': 24 }
 Object.entries(servicePages).forEach(([slug, p]) => {
-  pages[`/prestations/${slug}/`] = { ...p.meta, image: p.cats[0] === 'wedding' ? 0 : slug === 'anniversaire' ? 25 : 57 }
+  pages[`/prestations/${slug}/`] = { ...p.meta, image: servicePhoto[slug] ?? 14 }
 })
 
 export const notFound = {
@@ -160,7 +190,7 @@ const business = {
   description: 'Pâtissière-traiteur artisanale : wedding cakes, cake design, gâteaux d’anniversaire, brunchs et buffets événementiels faits maison.',
   url: `${SITE.url}/`,
   image: [ogImage(14), ogImage(0), ogImage(36)],
-  logo: `${photos[1].src}=w512`,
+  logo: `${SITE.url}/icon-512.png`,
   telephone: '+33656829711',
   email: contact.email,
   founder: { '@type': 'Person', name: 'Alicia Catala' },

@@ -4,7 +4,6 @@ import Ribbon from '../components/Ribbon'
 import Story from '../components/Story'
 import Services from '../components/Services'
 import Gallery from '../components/Gallery'
-import Wall from '../components/Wall'
 import Reviews from '../components/Reviews'
 import { CtaBand } from '../components/Blocks'
 
@@ -19,7 +18,6 @@ export default function Home() {
       <Story />
       <Services />
       <Gallery limit={8} showFilters={false} moreLink="/galerie/" title="Quelques _créations" />
-      <Wall />
       <Reviews />
       <CtaBand />
     </>

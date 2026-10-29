@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'motion/react'
 import { nav, contact } from '../data/content'
-import { img, logo } from '../data/photos'
 import { Icon } from '../lib'
 
 export default function Nav() {
@@ -20,6 +19,12 @@ export default function Nav() {
 
   // Ferme le menu mobile à chaque changement de page
   useEffect(() => { setOpen(false); setHidden(false) }, [pathname])
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e) => { if (e.key === 'Escape') setOpen(false) }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open])
 
   return (
     <>
@@ -29,7 +34,7 @@ export default function Nav() {
         transition={{ duration: 0.45 }}
       >
         <Link to="/" className="nav__brand" aria-label="O P'tit Four Truck — accueil">
-          <img src={img(logo, 120)} alt="" width="44" height="44" />
+          <img src="/icon-192.png" alt="" width="44" height="44" />
           <span>O P'tit Four <em>Truck</em></span>
         </Link>
         <nav className="nav__links" aria-label="Navigation principale">
